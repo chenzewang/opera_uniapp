@@ -94,7 +94,7 @@ export default {
 				{
 					name: '连接设备',
 					src: '../../static/rattle/mine/recently-played.png',
-					operate:()=>{}
+					operate:()=>{this.connection()}
 				},
 				{
 					name: '配置解码器',
@@ -221,11 +221,30 @@ export default {
 	},
 	methods: {
 		/*
+		*连接设备
+		*/
+		connection(){
+			uni.showModal({
+			    title: '连接设备',
+			    content: '确定链接设备吗？',
+			    success: function (res) {
+			        if (res.confirm) {
+						uni.navigateTo({
+							url: '../../pages/side/connection/connection',
+						});
+			        }
+			    }
+			});
+			
+			
+		},
+		
+		/*
 		*配置解码器
 		*/
 		configureCoder(){
 			uni.navigateTo({
-				url: '../../pages/configureDecoder/configureDecoder',
+				url: '../../pages/side/configureDecoder/configureDecoder',
 			});
 		},
 		defaultOperate(){
