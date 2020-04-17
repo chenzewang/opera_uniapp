@@ -1,6 +1,5 @@
 <template>
 	<view>
-		配置解码器页面
 		<div id="main">
 			<div id="top">N A A</div>
 			<div id="middle">

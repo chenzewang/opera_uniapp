@@ -1,8 +1,7 @@
 <template>
 	<view>
-		配置解码器页面
 		<div id="main">
-			<div id="top">N A A</div>
+			<div id="top">RoonBridge</div>
 			<div id="middle">
 					<div class="mid">
 						<text class="iconleft">&#xe616;</text>
