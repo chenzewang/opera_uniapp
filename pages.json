@@ -170,14 +170,29 @@
 					}
 				}
 			}
-		}
-	    ,{
-            "path" : "pages/side/configureDecoder/configureDecoder",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/side/connection/connection",
-            "style" : {
+		}, {
+			"path": "pages/side/configureDecoder/configureDecoder",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"titleColor": "#FFFFFF",
+						"titleText": "配置解码器",
+
+						"backgroundColor": "rgba(218, 45, 30, 1)",
+						"buttons": [{
+							"fontSrc": "/static/font/iconfont.ttf",
+							"text": "\ue655",
+							"width": "40px",
+							"fontSize": "24px",
+							"color": "#FFFFFF",
+							"background": "rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/side/connection/connection",
+			"style": {
 				"app-plus": {
 					"titleNView": {
 						"titleColor": "#FFFFFF",
@@ -193,10 +208,14 @@
 							"background": "rgba(0,0,0,0)"
 						}]
 					}
-				}}
-        }
-        ,{
-            "path" : "pages/side/mountDisk/mountDisk",
+				}
+			}
+		}, {
+			"path": "pages/side/mountDisk/mountDisk",
+			"style": {}
+		}
+	    ,{
+            "path" : "pages/side/connectWifi/connectWifi",
             "style" : {}
         }
     ],

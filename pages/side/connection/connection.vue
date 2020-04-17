@@ -120,7 +120,7 @@
 				})
 				// console.log(e.target.dataset.ip);
 				connectPlayer({
-					hostname: "http",
+					hostname: e.target.dataset.ip,
 					port: 9090
 				}).then(res => {
 					if (res.status == 200) {

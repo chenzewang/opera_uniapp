@@ -104,7 +104,7 @@ export default {
 				{
 					name: '配置无线网络',
 					src: '../../static/rattle/mine/radio.png',
-					operate:()=>{}
+					operate:()=>{this.configureWifi()}
 
 				},
 			],
@@ -245,6 +245,14 @@ export default {
 		configureCoder(){
 			uni.navigateTo({
 				url: '../../pages/side/configureDecoder/configureDecoder',
+			});
+		},
+		/*
+		*配置wifi
+		*/
+		configureWifi(){
+			uni.navigateTo({
+				url: "../../pages/side/connectWifi/connectWifi"
 			});
 		},
 		defaultOperate(){

@@ -3,28 +3,19 @@
 		<view class="fav_list">
 			<div data-v-357a65ed="" class="fav_list_box">
 				<div class="fav_list_title">
-					<h3 class="fav_list_title_h3">选择DSD:</h3>
+					<h3 class="fav_list_title_h3">当前连接的wifi:</h3>
 				</div>
 				<div class="my_fav_list">
-					<radio-group @change="radioChange1">
-						<view class="iplist">
-							<text class="title">DoP</text>
-							<radio class="switch" checked value="DoP" color="rgba(218, 45, 30, 1)"/>
-						</view>
-						<view class="iplist ">
-							<text class="uni-list-cell-db">Native</text>
-							<radio class="switch" value="Native"  color="rgba(218, 45, 30, 1)"  />
-						</view>
-					</radio-group>
+					<view class="iplist cell" plain:data-val="item.value" ><span>192.168.1.101(测试)</span>
+					</view>
 				</div>
 			</div>
-
 		</view>
-
+		
 		<view class="fav_list">
 			<div data-v-357a65ed="" class="fav_list_box">
 				<div class="fav_list_title">
-					<h3 class="fav_list_title_h3">选择解码器:</h3>
+					<h3 class="fav_list_title_h3">选择Wifi:</h3>
 				</div>
 				<div class="my_fav_list">
 					<button class="iplist cell" plain v-for="(item, index) in decoder_list" :key="index" :data-val="item.value" @tap="configureDecoder"><span>{{ item.key }}</span>

@@ -103,10 +103,6 @@
 		bottom: 0;
 		overflow: hidden;
 		z-index: 999;
-<<<<<<< HEAD
-=======
-	
->>>>>>> d8912c180ad97ffa81478dbdfb7d280481e22371
 	}
 
 	.uni-drawer__content {
@@ -119,10 +115,6 @@
 		bottom: 0;
 		background-color: #ffffff;
 		transition: transform 0.3s ease;
-<<<<<<< HEAD
-=======
-	
->>>>>>> d8912c180ad97ffa81478dbdfb7d280481e22371
 	}
 
 	.uni-drawer--left {
