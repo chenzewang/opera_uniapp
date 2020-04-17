@@ -18,12 +18,13 @@
 					<h3 class="fav_list_title_h3">选择Wifi:</h3>
 				</div>
 				<div class="my_fav_list">
-					<button class="iplist cell" plain v-for="(item, index) in decoder_list" :key="index" :data-val="item.value" @tap="configureDecoder"><span>{{ item.key }}</span>
+					<button class="iplist cell" plain v-for="(item, index) in decoder_list" :key="index" :data-val="item.value" @tap="configureWifi"><span>{{ item.key }}</span>
 					</button>
 
 				</div>
 			</div>
 		</view>
+		<uni-popup ref="popup" type="center">底部弹出 Popup</uni-popup>
 
 	</scroll-view>
 </template>
@@ -33,8 +34,10 @@
 		getSqueezeliteList,
 		configureDecoder
 	} from '@/model/configureServer.js'
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"
+
 	export default {
-		components: {},
+		components: {uniPopup},
 		data() {
 			return { 
 				decoder_list: [],
@@ -53,27 +56,11 @@
 					console.log('err', err);
 				})
 			},
-			configureDecoder(e) {
-				uni.showLoading({
-					title:"配置中"
-				})
-				var ouuput = String(e.target.dataset.val).split("-")[0].trim()
-				configureDecoder({
-					ouuput: ouuput,
-					dsd: this.dsd 
-				}).then(res => {
-					uni.hideLoading()
-					uni.showToast({
-						title:"配置成功"
-					})
-				}).catch(err => {
-					console.log(err)
-					uni.hideLoading()
-				})
-			},
-			radioChange1(evt) {
-				this.dsd=evt.target.value
+			configureWifi(e) {
+				this.$refs.popup.open()
+
 			}
+	
 		},
 
 		watch: {}
