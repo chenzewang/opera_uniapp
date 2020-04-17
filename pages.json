@@ -195,6 +195,10 @@
 					}
 				}}
         }
+        ,{
+            "path" : "pages/side/mountDisk/mountDisk",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

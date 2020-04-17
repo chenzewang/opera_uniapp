@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-15 13:26:11
+ * @LastEditTime: 2020-04-17 11:00:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\hybrid\html\getlocalip.html
+ -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +22,13 @@
 			document.addEventListener('UniAppJSBridgeReady', function() {
 				var ws=plus.webview.currentWebview();
 				plus.webview.hide(ws)
-				// console.log( "当前Webview窗口："+ws.getURL() );
 				getIPs().then(res=>{
 					uni.postMessage({
 						data: {
 							localip: res
 						}
 					});
+				// ws.close();
 				})
 			});
 		</script>

@@ -19,7 +19,12 @@
 			wyyIcon
 		},
 		created() {
-			this.check_login();
+			setTimeout(function() {
+				uni.redirectTo({
+					url: '../index/index',
+				});
+			}, 500);
+			// this.check_login();
 		},
 		
 		methods: {

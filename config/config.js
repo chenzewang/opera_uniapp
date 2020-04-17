@@ -1,9 +1,18 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-15 11:43:56
+ * @LastEditTime: 2020-04-16 22:51:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\config\config.js
+ */
 
 const systemInfo = uni.getSystemInfoSync();
 
 const status_bar_height = systemInfo.statusBarHeight;
 
 const HOST = 'http://api.cloudmusic.pulsating.cn:3000/';
+const host9090 = "http://localhost:9090";
 
 const API = {};
 //登录
@@ -56,5 +65,6 @@ export default {
 	systemInfo, 
 	status_bar_height,
 	HOST,
-	API
+	API,
+	host9090
 }
