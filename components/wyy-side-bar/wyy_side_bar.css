@@ -77,14 +77,18 @@
 	padding-left: 30rpx;
 	justify-content: center;
 	align-items: center;
+	margin-top: 18rpx;
 }
 .cell-right{
 	margin-left: 15rpx;
 	flex-direction: row;
 	align-items: center;
+	
 }
 .cell-name{
-	font-size: 22rpx;
+	/* font-size: 22rpx; */
+	font-size: 14px;
+	margin-top: 18rpx;
 }
 .number{
 	font-size: 20rpx;

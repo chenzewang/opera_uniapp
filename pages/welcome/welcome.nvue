@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-17 14:19:27
+ * @LastEditTime: 2020-04-17 14:24:00
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\pages\welcome\welcome.nvue
+ -->
 <template>
 	<view class="page ">
 		<image style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" src="../../static/run.png"></image>

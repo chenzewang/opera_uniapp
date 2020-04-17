@@ -1,6 +1,8 @@
 <template>
+	<view class="page">
 	<view v-if="isShow" ref="ani" class="uni-transition" :class="[ani.in]" :style="'transform:' +transform+';'+stylesObject" @click="change">
 		<slot></slot>
+	</view>
 	</view>
 </template>
 
