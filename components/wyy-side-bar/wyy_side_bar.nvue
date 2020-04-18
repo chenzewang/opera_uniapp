@@ -133,10 +133,11 @@ export default {
 					src: '../../static/rattle/mine/local-music.png',
 					operate:()=>{}
 				},
-				// {
-				// 	name: '游戏推荐',
-				// 	src: '../../static/rattle/mine/recently-played.png'
-				// },
+				{
+					name: '管理服务',
+					src: '../../static/rattle/mine/recently-played.png',
+					operate:()=>{}
+				},
 				// {
 				// 	name: '优惠券',
 				// 	src: '../../static/rattle/mine/download.png'

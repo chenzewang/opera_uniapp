@@ -59,7 +59,8 @@
 					'top': 0,
 					'left': 0,
 					'right': 0,
-					'backgroundColor': 'rgba(0, 0, 0, .6)'
+					// 'opacity': 1,
+					'backgroundColor': 'rgba(183, 183, 183, 0.6)'
 				},
 				transClass: {
 					'position': 'fixed',
@@ -86,7 +87,8 @@
 								'position': 'fixed',
 								'left': 0,
 								'right': 0,
-								'bottom': 0
+								'bottom': 0,
+								// 'height':100,
 							}
 							break
 						case 'center':
@@ -161,6 +163,7 @@
 		top: var(--window-top);
 		/* #endif */
 		/* #ifndef H5 */
+		
 		top: 0;
 		/* #endif */
 		bottom: 0;
@@ -217,6 +220,7 @@
 		left: 0;
 		right: 0;
 		transform: translateY(500px);
+
 	}
 
 	.center {
@@ -238,7 +242,7 @@
 		/* #ifndef APP-NVUE */
 		display: block;
 		/* #endif */
-		position: relative;
+		position: relative;	
 	}
 
 	.content-ani {
