@@ -130,7 +130,7 @@ export default {
 				},
 				{
 					name: '管理硬盘',
-					src: '../../static/rattle/mine/local-music.png',
+					src: '../../static/rattle/mine/more.png',
 					operate:()=>{}
 				},
 				{
