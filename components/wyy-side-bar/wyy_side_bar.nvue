@@ -131,12 +131,12 @@ export default {
 				{
 					name: '管理硬盘',
 					src: '../../static/rattle/mine/local-music.png',
-					operate:()=>{}
+					operate:()=>{this.mountDisk()}
 				},
 				{
 					name: '管理服务',
 					src: '../../static/rattle/mine/recently-played.png',
-					operate:()=>{}
+					operate:()=>{this.manageService()}
 				},
 				// {
 				// 	name: '优惠券',
@@ -255,6 +255,22 @@ export default {
 			uni.navigateTo({
 				url: "../../pages/side/connectWifi/connectWifi"
 			});
+		},
+		/*
+		*管理硬盘
+		*/
+		mountDisk(){
+			uni.navigateTo({
+				url: "../../pages/side/mountDisk/mountDisk"
+			});
+		},
+		/*
+		*管理服务
+		*/
+		manageService(){
+			uni.navigateTo({
+				url: '../../pages/side/manageService/manageService',
+			});	
 		},
 		defaultOperate(){
 			console.log(111);

@@ -2,13 +2,13 @@
 	import Storage from '@/utils/storage.js';
 	import song from '@/model/song.js';
 	import PlayerHelper from '@/utils/player.js';
-	
+
 	export default {
 		globalData: {
 			flrst_play: true,
 			player: {},
 		},
-		onLaunch: function () {
+		onLaunch: function() {
 			console.log('onLaunch');
 			this.init_played();
 			// //全局唯一播放管理
@@ -21,10 +21,10 @@
 				'src': "url(\'http://at.alicdn.com/t/font_1211227_midl7sqf2t8.ttf\')"
 			});
 		},
-		onShow: function () {
+		onShow: function() {
 			console.log('App Show')
 		},
-		onHide: function () {
+		onHide: function() {
 			console.log('App Hide')
 		},
 		methods: {
@@ -44,13 +44,13 @@
 				let played = Storage.get_played();
 				if (played && played.id) {
 					let music_id = played.id;
-					
-					song.get_song_url(music_id, (res)=> {
+
+					song.get_song_url(music_id, (res) => {
 						played.url = res.data[0].url;
 						this.$store.commit('set_played', played);
 						this.init_player();
 					});
-				}else {
+				} else {
 					this.init_player();
 				}
 			},
@@ -59,8 +59,8 @@
 				const player = plus.audio.createPlayer({
 					autoplay: false,
 				});
-				
-				player.addEventListener('canplay', ()=> {
+
+				player.addEventListener('canplay', () => {
 					if (this.globalData.flrst_play) {
 						this.globalData.flrst_play = false;
 						return;
@@ -68,44 +68,44 @@
 					console.log('on canplay');
 					PlayerHelper.play();
 				});
-				player.addEventListener('play', ()=> {
+				player.addEventListener('play', () => {
 					console.log('on play');
 					this.$store.commit('set_playing', true);
 				});
-				player.addEventListener('pause', ()=> {
+				player.addEventListener('pause', () => {
 					console.log('on pause');
 					this.$store.commit('set_playing', false);
 				});
-				player.addEventListener('stop', ()=> {
+				player.addEventListener('stop', () => {
 					console.log('on stop');
 					this.$store.commit('set_playing', false);
 				});
-				player.addEventListener('ended', ()=> {
+				player.addEventListener('ended', () => {
 					console.log('on ended');
-					PlayerHelper.next((played)=> {
+					PlayerHelper.next((played) => {
 						played && this.$store.commit('set_played', played);
 					});
 					this.$store.commit('set_playing', false);
 				});
-				player.addEventListener('error', (e)=> {
+				player.addEventListener('error', (e) => {
 					console.log('on error');
 					console.log(e);
 					this.$store.commit('set_playing', false);
 				});
-				player.addEventListener('waiting', ()=> {
+				player.addEventListener('waiting', () => {
 					console.log('on waiting');
 				});
-				player.addEventListener('seeking', ()=> {
+				player.addEventListener('seeking', () => {
 					console.log('on seeking');
 				});
-				player.addEventListener('seeked', ()=> {
+				player.addEventListener('seeked', () => {
 					console.log('on seeked');
 				});
-				player.addEventListener('prev', ()=> {
+				player.addEventListener('prev', () => {
 					// 后台播放控制器上点击上一曲按钮时触发，未开启后台控制器则不触发此事件
 					console.log('on prev');
 				});
-				player.addEventListener('next', ()=> {
+				player.addEventListener('next', () => {
 					// 后台播放控制器上点击下一曲按钮时触发，未开启后台控制器则不触发此事件
 					console.log('on next');
 				});
@@ -115,14 +115,21 @@
 			}
 		},
 	}
-	
-
 </script>
 
 <style>
-	.page{
+	.page {
 		font-size: 16px;
 	}
-	
 
+	@font-face {
+		font-family: 'iconfont';
+		/* project id 1760556 */
+		src: url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.eot');
+		src: url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.eot?#iefix') format('embedded-opentype'),
+			url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.woff2') format('woff2'),
+			url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.woff') format('woff'),
+			url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.ttf') format('truetype'),
+			url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.svg#iconfont') format('svg');
+	}
 </style>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:40:09
- * @LastEditTime: 2020-04-17 21:35:37
+ * @LastEditTime: 2020-04-23 20:55:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\common\mock\mockdata.js
@@ -18,8 +18,18 @@
    
  }
 
+ const config_mount_list = ["/dev/sda1 -> /mnt/music/sda1"]
+
+ const config_mount_local = {data:"aaaa"}
+
+ const config_mount_network = {
+   data: "aaaa"
+ }
 
   module.exports={
     config_list_squeezelite,
-    config_modify_squeezelite
+    config_modify_squeezelite,
+    config_mount_list,
+    config_mount_local,
+    config_mount_network
   }

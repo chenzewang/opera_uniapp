@@ -8,9 +8,9 @@
 			<wyy-mine-cell :items="common_list"></wyy-mine-cell>
 		</cell>
 		
-		<cell>
+		<!-- <cell>
 			<wyy-mine-fold :current_list="created_list" :number="subcount.createdPlaylistCount"></wyy-mine-fold>
-		</cell>
+		</cell> -->
 		
 		<cell v-if="favor_list.length > 0" >
 			<wyy-mine-fold :current_list="favor_list" musicListName="收藏的歌单" musicListType="favor" :number="subcount.subPlaylistCount"></wyy-mine-fold>
@@ -101,9 +101,9 @@
 				return [
 					{name: '本地音乐', icon: '&#xe9d5;', number: '', src: '../../static/rattle/mine/local-music.png'},
 					{name: '最近播放', icon: '&#xe61c;', number: '', src: '../../static/rattle/mine/recently-played.png'},
-					{name: '下载管理', icon: '&#xe666;', number: '', src: '../../static/rattle/mine/download.png'},
-					{name: '我的电台', icon: '&#xe633;', number: subcount.djRadioCount, src: '../../static/rattle/mine/radio.png'},
-					{name: '我的收藏', icon: '&#xe68a;', number: subcount.artistCount + subcount.mvCount, src: '../../static/rattle/mine/collect.png'},
+					// {name: '下载管理', icon: '&#xe666;', number: '', src: '../../static/rattle/mine/download.png'},
+					// {name: '我的电台', icon: '&#xe633;', number: subcount.djRadioCount, src: '../../static/rattle/mine/radio.png'},
+					// {name: '我的收藏', icon: '&#xe68a;', number: subcount.artistCount + subcount.mvCount, src: '../../static/rattle/mine/collect.png'},
 				]
 			},
 			subcount: function() {

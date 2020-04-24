@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-16 20:26:59
- * @LastEditTime: 2020-04-17 20:23:30
+ * @LastEditTime: 2020-04-23 21:15:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\common\server.js
@@ -32,6 +32,8 @@ http.createServer(function (req, res) {
   console.log("收到：URL:", req.url);
   const url = req.url.split("?")[0]
   const url_=url.replace(/\//g,"_").replace('_',"")
+  console.log("url_:", url_);
+
   let data   
   if (mockdata[url_]) {
     data = mockdata[url_]
@@ -54,7 +56,7 @@ http.createServer(function (req, res) {
   const url = req.url
   
   if (url.indexOf("/player/connect")>-1) {
-    data = new successModal()
+    data = new successModal({})
     res.end(JSON.stringify(data))
   } else {
     res.end("port:9090 未命中路由")
