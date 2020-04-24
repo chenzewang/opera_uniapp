@@ -20,24 +20,45 @@
 				<button :class="{subr:sub1show,subrr:!sub1show}" @click="sub1show=!sub1show">关闭该服务</button>
 				<button :class="{subl:!sub2show,subll:sub2show}" @click="sub2show=!sub2show">开机自启动</button>
 				<button :class="{subr:sub2show,subrr:!sub2show}" @click="sub2show=!sub2show">开机不自启</button>
-				<button :class="{subl:!sub3show,subll:sub3show}" @click="sub3show=!sub3show">重启该服务</button>
-				<button :class="{subr:sub3show,subrr:!sub3show}" @click="sub3show=!sub3show" style="margin-bottom: 8%; width:39%;font-size: 35rpx;">重新检测状态</button>
+				<button class="subl" >重启该服务</button>
+				<button class="subr"  style="margin-bottom: 8%; width:39%;font-size: 35rpx;">重新检测状态</button>
 			</div>
 		</div>
 	</view>
 </template>
 
 <script>
+	import {
+		checkServiceStatus,
+	} from "@/model/configureServer.js";
+
+
 export default {
 	components: {},
 	data() {
 		return {
-			sub1show:false,
-			sub2show:false,
+			sub1show:false,//服务是否开启
+			sub2show:false,//是否开机自启动
 			sub3show:false,
 		};
 	},
-	methods: {},
+	methods: {
+		checkServiceStatus(){
+			checkServiceStatus({type:"NAA"}).then(res=>{
+				this.sub1show.res.active
+				console.log(res);
+				
+			}).catch(res=>{
+				console.log(res);
+				
+			})
+		}
+	},
+	mounted(){
+		console.log(111);
+		
+		this.checkServiceStatus()
+	},
 	watch: {}
 };
 </script>
@@ -109,7 +130,6 @@ body {
 }
 .subl {
 	float: left;
-
 	margin-left: 5%;
 	margin-top: 7%;
 	width: 38%;
@@ -118,7 +138,6 @@ body {
 }
 .subr {
 	float: right;
-
 	margin-right: 5%;
 	margin-top: 8%;
 	width: 38%;

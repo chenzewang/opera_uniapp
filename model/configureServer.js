@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:59:46
- * @LastEditTime: 2020-04-24 13:09:55
+ * @LastEditTime: 2020-04-24 19:47:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\model\configureServer.js
@@ -178,6 +178,40 @@ export function connectWifi(params) {
         console.log(res);
 
         if (res.data.status == 200 ) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+
+/**
+ * opera/naa/roon 服务状态检测
+ * url： / config / status / squeezelite(naa/roon)
+ * 请求参数： 无
+ */
+export function checkServiceStatus(params) {
+  let url = "/config/status/squeezelite"
+  if(params.type=="RoonBridge"){
+    url = "/config/status/roon"
+  }else if(params.type=="NAA"){
+    url = "/config/status/naa"
+  }
+
+
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888"+url,
+      success: (res) => {
+        console.log(res);
+
+        if (res.data.status == 200) {
           resolve(res.data.data)
         } else {
           reject(res)

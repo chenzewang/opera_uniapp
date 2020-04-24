@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="box">
 		<!-- 连接设备页面 -->
 		<div style="display:flex;flex-direction: column;height: 100%;align-content: flex-end;">
 			<div>
@@ -33,11 +33,10 @@
 			<!-- <div class="bottom" style="display:flex;flex-direction:column;align-content:flex-end;"> -->
 			<!-- <div></div> -->
 			<view>
-				<button class="btn" :style="isSacning?'background-color: #e2e2e2;width: 100%;position: fixed; bottom: 0;' : 'background-color: #fcfcfc;width: 100%;position: fixed; bottom: 0;'"
-				 type="primary" :disabled="isSacning" @tap="scanIps">
-					<span class="iconleft">&#xe75e;</span>
-					<span class="iconbot" style="color: #000000;">扫描</span>
-				</button>
+			<button class="btn" :style="isSacning?'background-color: #e2e2e2;' : 'background-color: #fcfcfc;'" type="primary" :disabled="isSacning" @tap="scanIps">
+				<span class="iconleft">&#xe75e;</span>
+				<span class="iconbot" style="color: #000000;">扫描</span>
+			</button>
 			</view>
 			<!-- <div></div> -->
 			<!-- </div> -->
@@ -183,7 +182,7 @@
 </script>
 
 <style scoped>
-	body {
+	.box {
 		background-color: rgba(204, 204, 204, 0.23);
 	}
 
@@ -238,50 +237,49 @@
 		display: block;
 	}
 
-	.my_fav_list {
-		margin: 0;
-		padding: 0;
-		font-size: 100%;
-		vertical-align: baseline;
-		border: 0;
-		display: block;
-		overflow: hidden;
-		zoom: 1;
-	}
-
-	/* span{
-	margin-left: 3%;
-} */
-	.iplist {
-		font-size: 15px;
-		color: #4d4d4d;
-		margin-left: 5%;
-		padding: 16px 0;
-		border: 0 !important;
-		border-top: 1px solid #e0e0e0 !important;
-		text-align: left;
-		list-style: none;
-		/* background-color: rgba(0,0,0,0.1); */
-		border-radius: 0;
-	}
-
-	/* .bottom {
+.my_fav_list {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	border: 0;
+	display: block;
+	overflow: hidden;
+	zoom: 1;
+}
+.iplist {
+	font-size: 15px;
+	color: #4d4d4d;
+	margin-left: 5%;
+	padding: 16px 0;
+	border: 0 !important;
+	border-top: 1px solid #e0e0e0 !important;
+	text-align: left;
+	list-style: none;
+	/* background-color: rgba(0,0,0,0.1); */
+	border-radius: 0;
+}
+/* .bottom {
 	display: flex;
 	flex-direction:cloumn;
 	align-content: flex-end;
 } */
-	.iconleft {
-		display: inline-block;
-		font-family: iconfont;
-		text-align: center;
-		margin-top: 5rpx;
-		margin-right: 20rpx;
-		color: black;
-		font-size: 35rpx;
-	}
-
-	.iconbot {
-		font-size: 35rpx;
-		color: #000000;
-	}
+.btn{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
+.iconleft {
+	display: inline-block;
+	font-family: iconfont;
+	text-align: center;
+	margin-top: 5rpx;
+	margin-right: 20rpx;
+	color: black;
+	font-size: 35rpx;
+}
+.iconbot {
+	font-size: 35rpx;
+	color: #000000;
+}
 </style>
