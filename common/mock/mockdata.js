@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:40:09
- * @LastEditTime: 2020-04-23 20:55:32
+ * @LastEditTime: 2020-04-24 12:56:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\common\mock\mockdata.js
@@ -26,10 +26,19 @@
    data: "aaaa"
  }
 
+ const config_check_wifi = {
+   "ssid": "xuyiqing",
+   "status": 200,
+   "success": true
+ }
+
+  const config_config_wifi = "成功"
   module.exports={
     config_list_squeezelite,
     config_modify_squeezelite,
     config_mount_list,
     config_mount_local,
-    config_mount_network
+    config_mount_network,
+    config_check_wifi,
+    config_config_wifi
   }

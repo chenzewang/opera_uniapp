@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:59:46
- * @LastEditTime: 2020-04-23 21:00:18
+ * @LastEditTime: 2020-04-24 13:09:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\model\configureServer.js
@@ -127,6 +127,57 @@ export function mountNetworkDisk(mountNetworkDisk) {
       data: mountNetworkDisk,
       success: (res) => {
         if (res.data.status == 200) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+
+/**
+ * 检测当前连接的WIFI
+ * url： /config/check/wifi
+ * 请求参数： 无
+ */
+export function checkNowWifi() {
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888/config/check/wifi",
+      success: (res) => {
+        
+        if (res.data.data.status == 200 && res.data.data.ssid) {
+          resolve(res.data.data.ssid)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+/**
+ * 连接WIFI
+ * url： /config/config/wifi
+ * 请求参数： 无
+ */
+export function connectWifi(params) {
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888/config/config/wifi",
+      data: params,
+      success: (res) => {
+        console.log(res);
+
+        if (res.data.status == 200 ) {
           resolve(res.data.data)
         } else {
           reject(res)

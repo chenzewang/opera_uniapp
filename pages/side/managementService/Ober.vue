@@ -44,15 +44,15 @@ export default {
 </script>
 
 <style>
-@font-face {
-  font-family: 'iconfont';  /* project id 1760556 */
+/* @font-face {
+  font-family: 'iconfont'; 
   src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot');
   src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot?#iefix') format('embedded-opentype'),
   url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.woff2') format('woff2'),
   url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.woff') format('woff'),
   url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.ttf') format('truetype'),
   url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.svg#iconfont') format('svg');
-}
+} */
 .iconleft {
 	display: inline-block;
 	font-family: iconfont;

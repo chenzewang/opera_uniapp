@@ -45,7 +45,7 @@ export default {
 
 <style>
 @font-face {
-  font-family: 'iconfont';  /* project id 1760556 */
+  font-family: 'iconfont'; 
   src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot');
   src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot?#iefix') format('embedded-opentype'),
   url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.woff2') format('woff2'),

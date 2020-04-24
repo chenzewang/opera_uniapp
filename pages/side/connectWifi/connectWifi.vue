@@ -6,7 +6,7 @@
 					<h3 class="fav_list_title_h3">当前连接的wifi:</h3>
 				</div>
 				<div class="my_fav_list">
-					<view class="iplist cell" plain:data-val="item.value"><span>192.168.1.101(测试)</span></view>
+					<view class="iplist cell" plain:data-val="item.value"><span>{{nowConnectedIp}}</span></view>
 				</div>
 			</div>
 		</view>
@@ -17,20 +17,39 @@
 					<h3 class="fav_list_title_h3">选择Wifi:</h3>
 				</div>
 				<div class="my_fav_list">
-					<button @tap="configureWifi"><span>192.168.1.101(测试)</span></button>
-					<button class="iplist cell" plain v-for="(item, index) in decoder_list" :key="index" :data-val="item.value" @tap="configureWifi">
+					<button class="iplist" @tap="openPopUp" data-val="192.168.1.101"><span>192.168.1.101(测试)</span></button>
+					<button class="iplist cell" plain v-for="(item, index) in decoder_list" :key="index" :data-val="item.value"
+					 :data-name="item.key" @tap="openPopUp">
 						<span>{{ item.key }}</span>
 					</button>
 				</div>
 			</div>
 		</view>
 
-		<uni-popup ref="popup" type="center">
-			<div style="background-color: #FFFFFF;">
-				<input :type="showPass ? 'text' : 'password'" placeholder="请输入密码" v-model="passtext" style="width:95%;margin-left: 2%;font-size:35rpx;height:90rpx;padding-bottom: -6rpx; border-bottom:1px solid darkgrey;" />
-				<image :src="showPass ? src1 : src2" @tap="showEye" class="icon"></image>
-				<button class="btn" style="margin-left:5%;"><span class="btnspan">取消</span></button>
-				<button class="btn" style="margin-left:55%;"><span class="btnspan">连接</span></button>
+
+		<!-- 弹出层，输入密码 -->
+		<uni-popup ref="popup" type="top">
+			<div style="background-color: #ffffff; border-radius: 40rpx;">
+				<div class="secwife">
+					<span style="display: inline-block; margin-top: 8%;">{{nowChooseIp}}</span>
+				</div>
+				<input :type="showPass ? 'text' : 'password'" placeholder="    密码" v-model="passtext" class="uni-input" :style="
+            isshow
+              ? 'width:85%;height: 100rpx;margin-left:7%;margin-top: 8%; border: 1px solid black;background:rgba(224, 224, 224, 0.4);border-radius: 30rpx;'
+              : 'width:85%;height: 100rpx;margin-left:7%;margin-top: 8%; border: 1px solid #55aaff;background:rgba(213, 213, 213, 0.4);border-radius: 30rpx;'
+          "
+				 @focus="isshow = false" />
+				<!-- <image
+          :src="showPass ? src1 : src2"
+          @tap="showEye"
+          class="icon"
+        ></image> -->
+				<button class="btn" style="margin-left: 10%; display: inline-block;" @tap="closePopUp">
+					取消
+				</button>
+				<button class="btn" style="margin-left: 15%; float: left;" @tap="configureWifi">
+					连接
+				</button>
 			</div>
 		</uni-popup>
 	</scroll-view>
@@ -39,9 +58,11 @@
 <script>
 	import {
 		getSqueezeliteList,
-		configureDecoder
-	} from '@/model/configureServer.js';
-	import uniPopup from '@/components/uni-popup/uni-popup.vue';
+		configureDecoder,
+		checkNowWifi,
+		connectWifi
+	} from "@/model/configureServer.js";
+	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 
 	export default {
 		components: {
@@ -50,40 +71,81 @@
 		data() {
 			return {
 				decoder_list: [],
-				dsd: 'DoP',
+				dsd: "DoP",
 				showPass: false,
 				src1: "../../../static/rattle/mine/yanjing.png",
 				src2: "../../../static/rattle/mine/yanjing_4.png",
-				eyetext: '',
-				passtext: ''
-
+				eyetext: "",
+				passtext: "",
+				isshow: true,
+				eyetext: "",
+				nowChooseIp: "",
+				nowConnectedIp: ""
 			};
 		},
 		onLoad() {
 			this.getDecoderList();
+			this.checkNowWifi()
 		},
 		methods: {
 			getDecoderList() {
 				getSqueezeliteList()
-					.then(res => {
+					.then((res) => {
 						this.decoder_list = res;
 					})
-					.catch(err => {
-						console.log('err', err);
+					.catch((err) => {
+						console.log("err", err);
 					});
 			},
+
 			configureWifi(e) {
+				let params = {
+					ssid: this.nowChooseIp,
+					password: this.passtext
+				}
+				console.log(111);
+				connectWifi(params).then(res => {
+					// console.log(res);
+					uni.showToast({
+						title:res
+					})
+					this.closePopUp()
+					this.nowConnectedIp=params.ssid
+				}).catch(res=>{
+					uni.showToast({
+						title:"出错"
+					})
+					console.log(res);
+				})
+			},
+			openPopUp(e) {
 				this.$refs.popup.open();
+				this.nowChooseIp = e.target.dataset.name
+			},
+			closePopUp(e) {
+				this.$refs.popup.close();
+				this.passtext=""
 			},
 			getInputValue(e) {
 				console.log(e);
 			},
+			checkNowWifi() {
+				checkNowWifi().then(res => {
+					this.nowConnectedIp = res
+				}).catch(err => {
+					console.log(err);
+				})
+			},
 			showEye() {
 				this.showPass = !this.showPass;
-			}
+			},
+			focus(e) {
+				let height = e.detail.height;
+				console.log(height);
+			},
 		},
 
-		watch: {}
+		watch: {},
 	};
 </script>
 
@@ -165,40 +227,46 @@
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 
-	.iplist .switch {
-		float: right;
-		margin-right: 5%;
+	.uni-popup__wrapper-box {
+		width: 100%;
+		height: 55%;
+		border-radius: 51px;
 	}
 
-	.uni-popup__wrapper-box {
-		background-color: #ffffff;
-		height: 100%;
-		width: 100%;
+	/* .uni-popup__wrapper-box {
+	background-color: #ffffff;
+	height: 100%;
+	width: 100%;
+} */
+	.secwife {
+		text-align: center;
+		font-size: 40rpx;
+	}
+
+	.icon {
+		margin-top: -9%;
+		margin-right: 57rpx;
+		width: 59rpx;
+		height: 55rpx;
+		float: right;
 	}
 
 	.btn {
-		position: fixed;
-		bottom: 40rpx;
-		width: 40%;
-		height: 70rpx;
+		margin-top: 8%;
+		margin-bottom: 6%;
+		width: 30%;
+		height: 90rpx;
 		text-align: center;
-		padding-bottom: 40rpx;
+		/* border:none; */
+		border-radius: 12rpx;
+		/* padding-bottom: 40rpx; */
 		/* float: left; */
 		/* margin-top: 80%; */
-
 	}
 
 	.btnspan {
 		text-align: center;
 		font-size: 35rpx;
 		vertical-align: top;
-	}
-
-	.icon {
-		margin-top: -7%;
-		margin-right: 20rpx;
-		width: 59rpx;
-		height: 55rpx;
-		float: right;
 	}
 </style>
