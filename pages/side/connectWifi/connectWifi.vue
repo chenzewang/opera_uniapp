@@ -30,12 +30,14 @@
 						placeholder="    密码"
 						v-model="passtext"
 						class="uni-input"
-						:style="isshow ? 'width:85%;height: 100rpx;margin-left:7%;margin-top: 8%; border: 1px solid black;background:rgba(224, 224, 224, 0.4);border-radius: 30rpx;':'width:85%;height: 100rpx;margin-left:7%;margin-top: 8%; border: 1px solid #55aaff;background:rgba(213, 213, 213, 0.4);border-radius: 30rpx;'"
+						:style="isshow ? 'border: 1px solid black;background:rgba(224, 224, 224, 0.4);':'border: 1px solid #55aaff;background:rgba(213, 213, 213, 0.4);'"
 						@focus="isshow=false"
 					/>
 					<image :src="showPass ? src1 : src2" @tap="showEye" class="icon" ></image>
-				<button class="btn" style="margin-left:10%;display: inline-block;"><span class="btnspan">取消</span></button>
-				<button class="btn" style="margin-left: 15%;float:left"><span class="btnspan">连接</span></button>
+					<div class="btndiv">
+				<button class="btn"><span class="btnspan">取消</span></button>
+				<button class="btn"><span class="btnspan">连接</span></button>
+				</div>
 			</div>
 		</uni-popup>
 	</scroll-view>
@@ -194,6 +196,17 @@ li {
 	width: 59rpx;
 	height: 55rpx;
 	float: right;
+}
+.uni-input{
+	width:85%;
+	height: 100rpx;
+	margin-left:7%;
+	margin-top: 8%; 
+	border-radius: 30rpx;
+}
+.btndiv{
+	display: flex;
+	justify-content:space-around;
 }
 .btn {
 	margin-top: 8%;

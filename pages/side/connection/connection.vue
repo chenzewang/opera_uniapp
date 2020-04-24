@@ -27,7 +27,7 @@
 		<!-- <div class="bottom" style="display:flex;flex-direction:column;align-content:flex-end;"> -->
 			<!-- <div></div> -->
 			<view>
-			<button class="btn" :style="isSacning?'background-color: #e2e2e2;width: 100%;position: fixed; bottom: 0;' : 'background-color: #fcfcfc;width: 100%;position: fixed; bottom: 0;'" type="primary" :disabled="isSacning" @tap="scanIps">
+			<button class="btn" :style="isSacning?'background-color: #e2e2e2;' : 'background-color: #fcfcfc;'" type="primary" :disabled="isSacning" @tap="scanIps">
 				<span class="iconleft">&#xe75e;</span>
 				<span class="iconbot" style="color: #000000;">扫描</span>
 			</button>
@@ -234,10 +234,6 @@ li {
 	overflow: hidden;
 	zoom: 1;
 }
-
-/* span{
-	margin-left: 3%;
-} */
 .iplist {
 	font-size: 15px;
 	color: #4d4d4d;
@@ -255,6 +251,11 @@ li {
 	flex-direction:cloumn;
 	align-content: flex-end;
 } */
+.btn{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
 .iconleft {
 	display: inline-block;
 	font-family: iconfont;
