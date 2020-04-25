@@ -1,27 +1,29 @@
 <template>
 	<view>
 		<div id="main">
-			<div id="top">N A A</div>
+			<div id="top">{{top}}</div>
 			<div id="middle">
 					<div class="mid">
-						<text class="iconleft">&#xe616;</text>
+						<text class="iconleft" :style="sub1show?'color:#cece00':''">&#xe616;</text>
 						<div class="mright">该服务是否开启中？</div>
-						<span class="mbottom">否</span>
+						<span v-if="!sub1show" class="mbottom" >否</span>
+						<span v-else class="mbottom" >是</span>
 					</div>
 					<div class="mid">
-						<text class="iconleft">&#xe616;</text>
+						<text class="iconleft" :style="sub2show?'color:#cece00':''">&#xe616;</text>
 						<div class="mright">该服务开机是否自动启动？</div>
-						<span class="mbottom">否</span>
+						<span v-if="!sub2show" class="mbottom" >否</span>
+						<span v-else class="mbottom" >是</span>
 					</div>
 			</div>
 			<div id="bottom">
 				 <!-- <p :class="{red: !isshow,blue: isshow}" @click="isshow=!isshow">我爱云虹</p> -->
-				<button :class="{subl:!sub1show,subll:sub1show}" @click="sub1show=!sub1show" style="margin-top: 8%;">开启该服务</button>
+				<button :class="{subl:!sub1show,subll:sub1show}" @click="sub1show=!sub1show">开启该服务</button>
 				<button :class="{subr:sub1show,subrr:!sub1show}" @click="sub1show=!sub1show">关闭该服务</button>
 				<button :class="{subl:!sub2show,subll:sub2show}" @click="sub2show=!sub2show">开机自启动</button>
 				<button :class="{subr:sub2show,subrr:!sub2show}" @click="sub2show=!sub2show">开机不自启</button>
 				<button class="subl" >重启该服务</button>
-				<button class="subr"  style="margin-bottom: 8%; width:39%;font-size: 35rpx;">重新检测状态</button>
+				<button class="subr" >重检测状态</button>
 			</div>
 		</div>
 	</view>
@@ -35,6 +37,7 @@
 
 export default {
 	components: {},
+	props: ['top'],
 	data() {
 		return {
 			sub1show:false,//服务是否开启
@@ -121,42 +124,37 @@ body {
 	font-size: 35rpx;
 	color: rgb(183, 0, 0);
 }
-#bottom {
-	overflow: hidden;
+#bottom{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: space-around;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 	background-color: #fff;
 	width: 90%;
+	height: 500rpx;
 	margin: 0 auto;
 }
+
 .subl {
-	float: left;
-	margin-left: 5%;
-	margin-top: 7%;
+	height: 20%;
 	width: 38%;
 	font-size: 40rpx;
 	color: rgb(95, 114, 128);
 }
 .subr {
-	float: right;
-	margin-right: 5%;
-	margin-top: 8%;
+	height: 20%;
 	width: 38%;
 	font-size: 40rpx;
 	color: rgb(95, 114, 128);
 }
 .subll{
-	float: left;
-	margin-left: 5%;
-	margin-top: 7%;
 	width: 38%;
 	font-size: 40rpx;
 	color: white;
 	background-color: rgb(95, 114, 128);
 }
 .subrr{
-	float: right;
-	margin-right: 5%;
-	margin-top: 8%;
 	width: 38%;
 	font-size: 40rpx;
 	color: white;

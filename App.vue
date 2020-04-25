@@ -121,10 +121,18 @@
 	.page {
 		font-size: 16px;
 	}
-
+	@font-face {
+	  font-family: 'iconfont'; 
+	  src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot');
+	  src: url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.eot?#iefix') format('embedded-opentype'),
+	  url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.woff2') format('woff2'),
+	  url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.woff') format('woff'),
+	  url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.ttf') format('truetype'),
+	  url('http://at.alicdn.com/t/font_1760556_1xdg574rlqk.svg#iconfont') format('svg');
+	}
 	@font-face {
 		font-family: 'iconfont';
-		/* project id 1760556 */
+		
 		src: url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.eot');
 		src: url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.eot?#iefix') format('embedded-opentype'),
 			url('http://at.alicdn.com/t/font_1760556_i2tv8vna7in.woff2') format('woff2'),

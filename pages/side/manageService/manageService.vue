@@ -12,13 +12,14 @@
 		<uni-segmented-control :current="tab_current" :values="tabs" @clickItem="onClickItem" style-type="text" active-color="rgba(218, 45, 30, 1)"></uni-segmented-control>
 		<view class="content">
 			<view v-show="tab_current === 0">
-				<Ober></Ober>
+				<!-- <Ober></Ober> -->
+				<NAA top="Ober"></NAA>
 			</view>
 			<view v-show="tab_current === 1">
-				<roonBridge></roonBridge>
+				<NAA top="RoonBridge"></NAA>
 			</view>
 			<view v-show="tab_current === 2">
-				<NAA></NAA>
+				<NAA top="NAA"></NAA>
 			</view>
 		</view>
 
@@ -33,11 +34,12 @@
 	} from '@/model/configureServer.js';
 	import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue"
 	import NAA from "../managementService/NAA.vue"
-	import Ober from "../managementService/Ober.vue"
-	import roonBridge from "../managementService/roonBridge.vue"
+	// import Ober from "../managementService/Ober.vue"
+	// import roonBridge from "../managementService/roonBridge.vue"
 	export default {
 		components: {
-			uniSegmentedControl,NAA,Ober,roonBridge
+			// uniSegmentedControl,NAA,Ober,roonBridge
+			uniSegmentedControl,NAA
 		},
 		data() {
 			return {
