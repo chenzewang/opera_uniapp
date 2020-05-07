@@ -10,7 +10,7 @@
 					<cell class="title">
 						<text class="title-text">热搜榜</text>
 					</cell>
-					<cell class="hot-item" v-for="(item, index) in hot_list" :key="index" @tap="hot_search(item)">
+					<cell v-if="false" class="hot-item" v-for="(item, index) in hot_list" :key="index" @tap="hot_search(item)">
 						<view class="hot-item-index">
 							<text class="index-text">{{index + 1}}</text>
 						</view>

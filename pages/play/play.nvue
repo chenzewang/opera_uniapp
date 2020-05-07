@@ -227,7 +227,7 @@
 				    return parseInt(obj.second) <= parseInt(this.current_position) && obj.content;
 				});
 				
-				let current_row = active_lyric_rows.pop();
+				let current_row = active_lyric_rows.pop()||[];
 				
 				if (this.active_lyric_row_index == current_row.index) { //在一行歌词停留时, 就不滚动了
 					return;

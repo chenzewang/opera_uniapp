@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:40:09
- * @LastEditTime: 2020-04-24 19:46:36
+ * @LastEditTime: 2020-05-07 16:57:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\common\mock\mockdata.js
@@ -34,12 +34,15 @@ const config_check_wifi = {
   "success": true
 }
 
+const config_config_wifi = "成功"
+
+
+//三种服务的开关状态监测
 const config_status_naa = {
   "active": false,
   "status": 200,
   "success": true
 }
-
 const config_status_roon = {
   "active": true,
   "status": 200,
@@ -51,7 +54,102 @@ const config_status_squeezelite = {
   "success": true
 }
 
-const config_config_wifi = "成功"
+//三种服务的开机自启状态监测
+const config_boot_status_naa = {
+  "active": false,
+  "status": 200,
+  "success": true
+}
+const config_boot_status_roon = {
+  "active": true,
+  "status": 200,
+  "success": true
+}
+const config_boot_status_squeezelite = {
+  "active": false,
+  "status": 200,
+  "success": true
+}
+
+
+//切换三种服务的开机自启状态
+const config_boot_start_roon = {
+  "status": 200,
+  "success": true
+}
+
+const config_boot_start_squeezelite = {
+  "status": 200,
+  "success": true
+}
+
+const config_boot_start_naa = {
+  "status": 200,
+  "success": true
+}
+
+const config_boot_stop_roon = {
+  "status": 200,
+  "success": true
+}
+
+const config_boot_stop_squeezelite = {
+  "status": 200,
+  "success": true
+}
+
+const config_boot_stop_naa = {
+  "status": 200,
+  "success": true
+}
+
+
+//切换三种服务的开关状态
+const config_start_roon = {
+  "status": 200,
+  "success": true
+}
+
+const config_start_squeezelite = {
+  "status": 200,
+  "success": true
+}
+
+const config_start_naa = {
+  "status": 200,
+  "success": true
+}
+
+const config_stop_roon = {
+  "status": 200,
+  "success": true
+}
+
+const config_stop_squeezelite = {
+  "status": 200,
+  "success": true
+}
+
+const config_stop_naa = {
+  "status": 200,
+  "success": true
+}
+
+
+//三种服务的重启
+const config_restart_naa = {
+  "status": 200,
+  "success": true
+}
+const config_restart_squeezelite = {
+  "status": 200,
+  "success": true
+}
+const config_restart_roon = {
+  "status": 200,
+  "success": true
+}
+
 
 module.exports = {
   config_list_squeezelite,
@@ -63,5 +161,25 @@ module.exports = {
   config_config_wifi,
   config_status_naa,
   config_status_roon,
-  config_status_squeezelite
+  config_status_squeezelite,
+  config_boot_status_naa,
+  config_boot_status_roon,
+  config_boot_status_squeezelite,
+  config_boot_start_roon,
+  config_boot_start_squeezelite,
+  config_boot_start_naa,
+  config_boot_stop_roon,
+  config_boot_stop_squeezelite,
+  config_boot_stop_naa,
+
+  config_start_roon,
+  config_start_squeezelite,
+  config_start_naa,
+  config_stop_roon,
+  config_stop_squeezelite,
+  config_stop_naa,
+
+  config_restart_naa,
+  config_restart_squeezelite,
+  config_restart_roon
 }

@@ -33,9 +33,7 @@
 		mountNetworkDisk
 	} from '@/model/configureServer.js';
 	import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue"
-	import NAA from "../managementService/NAA.vue"
-	// import Ober from "../managementService/Ober.vue"
-	// import roonBridge from "../managementService/roonBridge.vue"
+	import NAA from "../manageService/item.vue"
 	export default {
 		components: {
 			// uniSegmentedControl,NAA,Ober,roonBridge

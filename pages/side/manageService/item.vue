@@ -1,16 +1,17 @@
 <template>
+	<!-- 管理服务item组件 -->
 	<view>
 		<div id="main">
 			<div id="top">{{top}}</div>
 			<div id="middle">
 					<div class="mid">
-						<text class="iconleft" :style="sub1show?'color:#cece00':''">&#xe616;</text>
+						<text class="iconleft" :style="sub1show?'color:rgba(218, 45, 30, 1)':''">&#xe616;</text>
 						<div class="mright">该服务是否开启中？</div>
 						<span v-if="!sub1show" class="mbottom" >否</span>
 						<span v-else class="mbottom" >是</span>
 					</div>
 					<div class="mid">
-						<text class="iconleft" :style="sub2show?'color:#cece00':''">&#xe616;</text>
+						<text class="iconleft" :style="sub2show?'color:rgba(218, 45, 30, 1)':''">&#xe616;</text>
 						<div class="mright">该服务开机是否自动启动？</div>
 						<span v-if="!sub2show" class="mbottom" >否</span>
 						<span v-else class="mbottom" >是</span>
@@ -18,12 +19,12 @@
 			</div>
 			<div id="bottom">
 				 <!-- <p :class="{red: !isshow,blue: isshow}" @click="isshow=!isshow">我爱云虹</p> -->
-				<button :class="{subl:!sub1show,subll:sub1show}" @click="sub1show=!sub1show">开启该服务</button>
-				<button :class="{subr:sub1show,subrr:!sub1show}" @click="sub1show=!sub1show">关闭该服务</button>
-				<button :class="{subl:!sub2show,subll:sub2show}" @click="sub2show=!sub2show">开机自启动</button>
-				<button :class="{subr:sub2show,subrr:!sub2show}" @click="sub2show=!sub2show">开机不自启</button>
-				<button class="subl" >重启该服务</button>
-				<button class="subr" >重检测状态</button>
+				<button :class="{subl:!sub1show,subll:sub1show}" @tap="switchServer">开启该服务</button>
+				<button :class="{subr:sub1show,subrr:!sub1show}" @tap="switchServer">关闭该服务</button>
+				<button :class="{subl:!sub2show,subll:sub2show}" @tap="switchPowerOn">开机自启动</button>
+				<button :class="{subr:sub2show,subrr:!sub2show}" @tap="switchPowerOn">开机不自启</button>
+				<button class="subl" @tap="restartServer">重启该服务</button>
+				<button class="subr" @tap="reCheckStatus" >重检测状态</button>
 			</div>
 		</div>
 	</view>
@@ -32,6 +33,10 @@
 <script>
 	import {
 		checkServiceStatus,
+		checkPowerOnStatus,
+		switchPowerOn,
+		switchServerOn,
+		restartServer
 	} from "@/model/configureServer.js";
 
 
@@ -47,20 +52,73 @@ export default {
 	},
 	methods: {
 		checkServiceStatus(){
-			checkServiceStatus({type:"NAA"}).then(res=>{
-				this.sub1show.res.active
-				console.log(res);
-				
+			checkServiceStatus({type:this.top}).then(res=>{
+				this.sub1show=res.active
 			}).catch(res=>{
 				console.log(res);
-				
 			})
-		}
+		},
+		checkPowerOnStatus(){
+			checkPowerOnStatus({type:this.top}).then(res=>{
+				this.sub1show=res.active
+			}).catch(res=>{
+				console.log(res);
+			})
+		},
+		//重新检测两种状态
+		reCheckStatus(){
+			uni.showToast({
+				title:'检测完毕'
+			})
+			this.checkServiceStatus()
+			this.checkPowerOnStatus()
+		},
+		/*
+		*切换开机自启状态
+		*/
+		switchPowerOn(){
+			uni.showLoading({
+				title:'操作进行中'
+			})
+			let isOn=this.sub2show?"off":"on"  //开还是关
+			switchPowerOn({type:[this.top,isOn]}).then(res=>{
+				this.sub2show=!this.sub2show
+				uni.hideLoading()
+			}).catch(err=>{
+				uni.hideLoading()
+			})
+		},
+		/*
+		*切换服务开关状态
+		*/
+		switchServer(){
+			uni.showLoading({
+				title:'操作进行中'
+			})
+			let isOn=this.sub1show?"off":"on"  //开还是关
+			switchServerOn({type:[this.top,isOn]}).then(res=>{
+				this.sub1show=!this.sub1show
+				uni.hideLoading()
+			}).catch(err=>{
+				uni.hideLoading()
+			})
+		},
+		//重新重启服务
+		restartServer(){
+			uni.showLoading({
+				title:'操作进行中'
+			})
+			restartServer({type:this.top}).then(res=>{
+				uni.hideLoading()
+			}).catch(res=>{
+				uni.hideLoading()
+				console.log(res);
+			})
+		},
 	},
 	mounted(){
-		console.log(111);
-		
 		this.checkServiceStatus()
+		this.checkPowerOnStatus()
 	},
 	watch: {}
 };

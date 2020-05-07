@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-17 19:59:46
- * @LastEditTime: 2020-04-24 19:47:22
+ * @LastEditTime: 2020-05-07 16:58:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\model\configureServer.js
@@ -192,7 +192,7 @@ export function connectWifi(params) {
 
 
 /**
- * opera/naa/roon 服务状态检测
+ * opera/naa/roon 服务开关状态检测
  * url： / config / status / squeezelite(naa/roon)
  * 请求参数： 无
  */
@@ -204,14 +204,172 @@ export function checkServiceStatus(params) {
     url = "/config/status/naa"
   }
 
-
   return new Promise((resolve, reject) => {
     uni.request({
       url: "http://" + host + ":8888"+url,
       success: (res) => {
-        console.log(res);
-
         if (res.data.status == 200) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+/**
+ * opera/naa/roon 服务开机自启状态检测
+ * url： / config / boot_status / squeezelite(naa/roon)
+ * 请求参数： 无
+ */
+export function checkPowerOnStatus(params) {
+  let url = "/config/boot_status/squeezelite"
+  if (params.type == "RoonBridge") {
+    url = "/config/boot_status/roon"
+  } else if (params.type == "NAA") {
+    url = "/config/boot_status/naa"
+  }
+  
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888" + url,
+      success: (res) => {
+        
+        if (res.data.status == 200) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+
+
+
+/**
+ *  切换开机自启状态
+ * url： /config/boot_start(boot_stop)/roon(naa/squeezelite)
+ * 请求参数： 无
+ */
+ /**
+  * @param {*} params
+  * params.type=['NAA','on']    第一个是服务类型，第二个是开或者关
+  */
+export function switchPowerOn(params) {
+  let url = ""
+
+  let obj={
+    RoonBridge: {
+      on: "/config/boot_start/roon",
+      off: "/config/boot_stop/roon"
+    },
+    NAA: {
+      on: "/config/boot_start/naa",
+      off: "/config/boot_stop/naa"
+    }, 
+    Ober: {
+      on: "/config/boot_start/squeezelite",
+      off: "/config/boot_stop/squeezelite"
+    }, 
+  }
+
+  url = obj[params.type[0]][params.type[1]]
+
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888" + url,
+      success: (res) => {
+        if (res.data.success == true) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+
+
+/**
+ *  切换服务开关状态
+ * url： /config/start/roon
+ * 请求参数： 无
+ */
+/**
+ * @param {*} params
+ * params.type=['NAA','on']    第一个是服务类型，第二个是开或者关
+ */
+export function switchServerOn(params) {
+  let url = ""
+
+  let obj = {
+    RoonBridge: {
+      on: "/config/start/roon",
+      off: "/config/stop/roon"
+    },
+    NAA: {
+      on: "/config/start/naa",
+      off: "/config/stop/naa"
+    },
+    Ober: {
+      on: "/config/start/squeezelite",
+      off: "/config/stop/squeezelite"
+    },
+  }
+
+  url = obj[params.type[0]][params.type[1]]
+
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888" + url,
+      success: (res) => {
+        if (res.data.success == true) {
+          resolve(res.data.data)
+        } else {
+          reject(res)
+        }
+      },
+      fail(err) {
+        reject(err)
+      }
+    });
+  })
+}
+
+/**
+ *  重启服务
+ * url： /config/restart/roon(squeezelite,naa)
+ * 请求参数： 无
+ */
+export function restartServer(params) {
+  let url = ""
+
+  let obj = {
+    RoonBridge: "/config/restart/roon",
+    NAA: "/config/restart/naa",
+    Ober: "/config/restart/squeezelite",
+  }
+
+  url = obj[params.type]
+
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url: "http://" + host + ":8888" + url,
+      success: (res) => {
+        if (res.data.success == true) {
           resolve(res.data.data)
         } else {
           reject(res)
