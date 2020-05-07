@@ -8,7 +8,7 @@
  */
 
 // const host = uni.getStorageSync('connectionIp')
-const host = "192.168.1.103"
+const host = "192.168.1.102"
 
 
 /**
@@ -77,7 +77,7 @@ export function configureDecoder(params) {
 export function getDiskList() {
   return new Promise((resolve, reject) => {
     uni.request({
-      url: "http://" + "192.168.1.103" + ":8888/config/mount/list",
+      url: "http://" + host + ":8888/config/mount/list",
       success: (res) => {        
         if (res.data.status == 200) {
           resolve(res.data.data)
