@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-17 14:19:27
- * @LastEditTime: 2020-04-17 14:24:00
- * @LastEditors: your name
+ * @LastEditTime: 2020-06-01 00:37:50
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\pages\welcome\welcome.nvue
  -->
@@ -27,12 +27,13 @@
 			wyyIcon
 		},
 		created() {
+			//欢迎页后转入index.nvue
 			setTimeout(function() {
 				uni.redirectTo({
 					url: '../index/index',
 				});
 			}, 500);
-			// this.check_login();
+			// this.check_login();//没有登录部分，不需要
 		},
 		
 		methods: {

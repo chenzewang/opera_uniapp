@@ -1,5 +1,16 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-15 11:43:56
+ * @LastEditTime: 2020-06-01 00:17:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\model\other.js
+ */ 
 let Other = {};
 
+/*
+*获取banner图
+*/
 Other.banner = function(cb) {
 	let url = config.API.BANNER;
 

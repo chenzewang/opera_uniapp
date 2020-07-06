@@ -28,18 +28,27 @@
 			console.log('App Hide')
 		},
 		methods: {
+			/**
+			 * 初始化播放模式  循环、随机等等
+			 */
 			init_play_mode() {
 				let current_play_mode = Storage.get_play_mode();
 				if (current_play_mode) {
 					this.$store.commit('set_play_mode', current_play_mode);
 				}
 			},
+			/**
+			 * 初始化播放列表
+			 */
 			init_current_playlist() {
 				let current_playlist = Storage.get_current_playlist();
 				if (current_playlist) {
 					this.$store.commit('set_current_playlist', current_playlist);
 				}
 			},
+			/**
+			 * 初始化上次的播放数据
+			 */
 			init_played() {
 				let played = Storage.get_played();
 				if (played && played.id) {
@@ -54,6 +63,11 @@
 					this.init_player();
 				}
 			},
+			/**
+			 * 初始化播放器（单例）
+			 * 这个是调用h5 plus的SDK，使用手机播放。
+			 * 需要重写一个播放器
+			 */
 			init_player() {
 				//初始化的时候, 如果played存在, 则需要将played.src填入, 然后不要播放, 这样play页面就可以获取到歌曲音频长度
 				const player = plus.audio.createPlayer({

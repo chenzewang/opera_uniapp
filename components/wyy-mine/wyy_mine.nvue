@@ -1,5 +1,6 @@
 <template>
 	<list show-scrollbar=false class="mine">
+
 		<cell>
 			<wyy-category-bars :bars="categoryBars"></wyy-category-bars>
 		</cell>
@@ -8,7 +9,8 @@
 			<wyy-mine-cell :items="common_list"></wyy-mine-cell>
 		</cell>
 		
-		<!-- <cell>
+		<!-- 注释是因为这里需要登录才能获取到数据，获取数据失败时的处理有bug -->
+		<!-- <cell>  
 			<wyy-mine-fold :current_list="created_list" :number="subcount.createdPlaylistCount"></wyy-mine-fold>
 		</cell> -->
 		
@@ -101,9 +103,9 @@
 				return [
 					{name: '本地音乐', icon: '&#xe9d5;', number: '', src: '../../static/rattle/mine/local-music.png'},
 					{name: '最近播放', icon: '&#xe61c;', number: '', src: '../../static/rattle/mine/recently-played.png'},
-					// {name: '下载管理', icon: '&#xe666;', number: '', src: '../../static/rattle/mine/download.png'},
-					// {name: '我的电台', icon: '&#xe633;', number: subcount.djRadioCount, src: '../../static/rattle/mine/radio.png'},
-					// {name: '我的收藏', icon: '&#xe68a;', number: subcount.artistCount + subcount.mvCount, src: '../../static/rattle/mine/collect.png'},
+					{name: '下载管理', icon: '&#xe666;', number: '', src: '../../static/rattle/mine/download.png'},
+					// {name: '我的电台', icon: '&#xe633;', number: subcount.djRadioCount, src: '../../static/rattle/mine/radio.png'},//注释原因：没登录获取不到数据有bug
+					// {name: '我的收藏', icon: '&#xe68a;', number: subcount.artistCount + subcount.mvCount, src: '../../static/rattle/mine/collect.png'},//同上
 				]
 			},
 			subcount: function() {
@@ -120,6 +122,9 @@
 			this.get_playlist();
 		},
 		methods:{
+			/**
+			 * 获取播放列表
+			 */
 			get_playlist() {
 				$repeater.user.get_playlist(this.uid, (data)=> {
 					let playlist = data.playlist;

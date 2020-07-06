@@ -6,6 +6,7 @@ function get_player() {
 	return getApp().globalData.player;
 }
 
+//设置要播放的歌的url
 PlayerHelper.set_url = function(url) {
 	
 	url = url || Storage.get_played().url;

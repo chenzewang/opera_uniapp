@@ -221,35 +221,33 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/side/connectWifi/connectWifi",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"titleColor": "#FFFFFF",
+						"titleText": "配置无线网络",
+						"backgroundColor": "rgba(218, 45, 30, 1)"
+					}
+				}
+			}
+		}, {
+			"path": "pages/side/manageService/manageService",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"titleColor": "#FFFFFF",
+						"titleText": "管理服务",
+						"backgroundColor": "rgba(218, 45, 30, 1)"
+					}
+				}
+			}
 		}
-	    ,{
-            "path" : "pages/side/connectWifi/connectWifi",
-            "style": {
-            	"app-plus": {
-            		"titleNView": {
-            			"titleColor": "#FFFFFF",
-            			"titleText": "配置无线网络",
-            			"backgroundColor": "rgba(218, 45, 30, 1)"
-            		}
-            	}
-            }
-        }
-        ,{
-            "path": "pages/side/manageService/manageService",
-            "style": {
-            	"app-plus": {
-            		"titleNView": {
-            			"titleColor": "#FFFFFF",
-            			"titleText": "管理服务",
-            			"backgroundColor": "rgba(218, 45, 30, 1)"
-            		}
-            	}
-            }
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "cloud music",
+		"navigationBarTitleText": "Opera Audio Player",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#ffffff"
 	}

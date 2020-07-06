@@ -1,3 +1,14 @@
+/*
+ * @Author: 日王
+ * @Date: 2020-04-15 11:43:56
+ * @LastEditTime: 2020-06-01 00:34:53
+ * @LastEditors: Please set LastEditors
+ * @Description: 中继器，抛出所有模块
+ * @FilePath: \opera_uniapp\utils\repeater.js
+ */ 
+
+
+
 import config from '../config/config.js';
 import helper from '../helper/helper.js';
 

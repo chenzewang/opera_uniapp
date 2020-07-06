@@ -2,6 +2,8 @@
 	<view class="tabs wyy-bg-color" style="">
 		<view :style="{ height: statusbar_height + 'px'}" style="background-color: rgba(218, 45, 30, 1);;"></view>
 		
+
+		<!-- 顶部栏 -->
 		<view class="sub_page">
 			<view class="left-bar" @tap="show_side_drawer">
 				<image class="menu-icon" src="/static/menu.png"></image>
@@ -15,7 +17,9 @@
 				<image class="search-icon" src="/static/search.png"></image>
 			</view>
 		</view>
+		<!-- end 顶部栏 -->
 		
+		<!-- 一个swiper，主体部分 -->
 		<scroll-view style="flex: 1;">	
 			<swiper :current="tab_index" class="swiper-box" @change="change_tab">
 				<swiper-item class="swiper-item">
@@ -32,14 +36,16 @@
 				</swiper-item>
 			</swiper>
 		</scroll-view>
-		
+		<!-- end 主体部分 -->
 		
 		
 		<wyy-play v-if="played"></wyy-play>
 
+		<!-- 侧滑栏组件 -->
 		<uni-drawer :visible="show_sidebar" mode="left" @close="close_side_drawer('left')">
 			<wyy-side-bar></wyy-side-bar>
 		</uni-drawer>
+		<!-- end 侧滑栏组件 -->
 	</view>
 </template>
 

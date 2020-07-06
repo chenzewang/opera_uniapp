@@ -1,15 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-16 21:45:16
- * @LastEditTime: 2020-04-23 21:23:34
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \opera_uniapp\model\player.js
- */
-/*
- * @Author: your name
- * @Date: 2020-04-16 21:45:16
- * @LastEditTime: 2020-04-16 21:53:49
+ * @LastEditTime: 2020-07-02 18:03:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\model\player.js
@@ -28,14 +20,14 @@ import config from '../config/config.js';
  */
 export function connectPlayer(params) {
   let url = `http://${params.hostname}:9090/player/connect`
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve, reject) => {
     uni.request({
-      url: url, //仅为示例，并非真实接口地址。
+      url: url,
       data: params,
       success: (res) => {
         resolve(res)
       },
-      fail(res){
+      fail(res) {
         reject(res)
       }
     });
@@ -47,4 +39,3 @@ export function connectPlayer(params) {
   //     data: params
   //   })
 }
-

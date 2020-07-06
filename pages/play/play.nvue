@@ -1,5 +1,7 @@
 <template>
 	<view class="page">
+
+		<!-- 歌曲图片 -->
 		<uni-transition :duration="300" :mode-class="mode_class" :styles="transfrom_class" :show="show_lyric">
 			
 			<list v-if="!nolyric" class="lyric-list" show-scrollbar="false" >
@@ -14,6 +16,9 @@
 				<text class="lyric-row-text">纯音乐, 请欣赏</text>
 			</view>
 		</uni-transition>
+		<!-- end 歌曲图片 -->
+
+		<!-- 歌词以及收藏、下载、评论、更多 四个按钮 -->
 		<uni-transition :duration="300" :mode-class="mode_class" :styles="transfrom_class" :show="!show_lyric">
 			<view class="container" @tap="change_container()">
 				<view class="cover">
@@ -39,10 +44,12 @@
 				</view>
 			</view>
 		</uni-transition>
+		<!-- end 歌词以及四个按钮 -->
 		
-		
+		<!-- 播放进度条以及几个播放操作按钮 -->
 		<view class="footer">
 			
+			<!-- 进度条 -->
 			<view class="slider-view">
 				<view class="current_time">
 					<text class="time-text">{{position_show}}</text>
@@ -54,7 +61,8 @@
 					<text class="time-text grey-time-text">{{duration_show}}</text>
 				</view>
 			</view>
-			
+
+			<!-- 播放操作按钮 -->
 			<view class="handle-area">
 				<view class="icon-group">
 					<view class="icon-area loop" @tap="change_play_mode">
@@ -75,11 +83,15 @@
 					<view class="icon-area list-menu" @tap="open_playlist">
 						<wyy-icon type="&#xe671;" size="40" color="#FFFFFF" ></wyy-icon>
 					</view>
-					
 				</view>
 			</view>
+
 		</view>
+		<!-- 播放进度条以及按钮 -->
+
+		<!-- 播放列表 -->
 		<playlist-drawer ref="playlist_drawer"></playlist-drawer>
+		<!-- end 播放列表 -->
 	</view>
 </template>
 
@@ -128,6 +140,10 @@
 			};
 		},
 		computed: {
+
+			/**
+			 * format一下时间格式   分：秒
+			 */
 			position_show() {
 				let minute = parseInt(this.current_position / 60);
 				let second = this.current_position % 60;
@@ -139,6 +155,10 @@
 				}
 				return minute + ':' + second;
 			},
+
+			/**
+			 * 歌曲总时间   分：秒
+			 */
 			duration_show() {
 				let minute = parseInt(this.duration / 60);
 				let second = this.duration % 60;
@@ -150,9 +170,15 @@
 				}
 				return minute + ':' + second;
 			},
+			
+			/*
+			*播放状态？
+			*/
 			playing() {
 				return this.$store.state.playing;
 			},
+
+			/*当前播放的歌曲的数据 */
 			played() {
 				return this.$store.state.played;
 			},
@@ -330,12 +356,20 @@
 					title: title
 				});
 			},
+
+			/**
+			 * 拖动过程中触发的事件handle函数
+			 */
 			slider_changing(e) {
 				this.dragging = true;
 				this.current_position = e.detail.value;
 			},
+
+			/**
+			 * 完成一次拖动后触发的事件handle函数
+			 */
 			slider_change(e) {
-				console.log(e);
+				// console.log(e);
 				let position = e.detail.value;
 				$repeater.player.seek_to(position);
 				this.dragging = false;
@@ -348,9 +382,6 @@
 				
 			},
 			init_timer() {
-				
-				
-				
 				if (this.timer) {
 					clearInterval(this.timer);
 					this.timer = '';
