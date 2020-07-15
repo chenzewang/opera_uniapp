@@ -1,17 +1,25 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-15 11:43:56
+ * @LastEditTime: 2020-07-15 13:54:33
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\components\wyy-find-recommend\wyy_find_recommend.nvue
+--> 
 <template>
 	<div class="find-recommend">
 
 		<div class="title">
 			<div class="title-left">
-				<text class="title-content">推荐歌单</text>
+				<text class="title-content">专辑</text>
 			</div>
 			<div class="title-right" @click="toMusicList">
-				<text class="title-handle">歌单广场</text>
+				<text class="title-handle">全部专辑</text>
 			</div>
 		</div>
 
 		<div class="music-lists">
-			<div class="music-list" v-for="(playlist,mlIndex) in recommend_playlists" :key="mlIndex" @tap="to_playlist(playlist)">
+			<!-- <div class="music-list" v-for="(playlist,mlIndex) in recommend_playlists" :key="mlIndex" @tap="to_playlist(playlist)">
 				<image class="ml-bg-image" resize="cover" :src="playlist.picUrl"></image>
 				<div class="music-list-header" v-if="showImageMask">
 					<text class="favorite-num">{{playlist.playCount}}</text>
@@ -19,6 +27,16 @@
 
 				<div class="music-list-footer">
 					<text class="list-name">{{playlist.name}}</text>
+				</div>
+			</div> -->
+			<div class="music-list" v-for="(album,index) in albums" :key="index" @tap="to_playlist(album)">
+				<image class="ml-bg-image" resize="cover" :src="albumImgUrl(album.id)"></image>
+				<div class="music-list-header" v-if="showImageMask">
+					<!-- <text class="favorite-num">{{album.name}}</text> -->
+				</div>
+
+				<div class="music-list-footer">
+					<text class="list-name">{{album.name}}</text>
 				</div>
 			</div>
 		</div>
@@ -31,6 +49,9 @@
 
 <script>
 	import $repeater from '@/utils/repeater.js';
+	import { getAlbumsList } from "@/model/api/albums.js";
+	import { randomPlay } from "@/model/api/playerApi.js";
+
 	export default {
 
 		components: {
@@ -44,26 +65,44 @@
 		},
 		data() {
 			return {
-				recommend_playlists: []
+				recommend_playlists: [],
+				albums:[]
 			}
 		},
 		created() {
 			this.get_recommend_playlists();
+			this.getAlbumsList({page_size:9,page:1})
+			// randomPlay({mode:"tracks"}).then(res=>{
+			// 	console.log(res);
+			// }).catch(err=>{
+			// 	console.log(err);
+			// })
 		},
 		watch: {
 
 		},
 		methods: {
-			to_playlist(playlist) {
-				$repeater.helper.to('/pages/playlist/playlist?playlist_id=' + playlist.id + '&cover_image=' + playlist.picUrl + '&name=' + playlist.name);
+			to_playlist(album) {
+				$repeater.helper.to('/pages/playlist/playlist?playlist_id=' + album.id + '&cover_image=' + this.albumImgUrl(album.id) + '&name=' + album.name);
 			},
 			get_recommend_playlists() {
 				$repeater.personalized.playlist((res)=> {
 					this.recommend_playlists = res.result;
 				}, 6)
 			},
+			getAlbumsList(params){
+				getAlbumsList(params).then(res=>{
+					this.albums=res
+				}).catch(err=>{
+					
+				})
+			},
 			toMusicList() {
 				console.log('toMusicList');
+			},
+			albumImgUrl(id){
+				let host = uni.getStorageSync('connectionIp')
+				return  `http://${host}:9000/music/${id}/cover.jpg`
 			}
 		}
 

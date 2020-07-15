@@ -97,6 +97,11 @@ export default {
 					operate:()=>{this.connection()}
 				},
 				{
+					name: '选择播放机',
+					src: '../../static/rattle/mine/recently-played.png',
+					operate:()=>{this.choosePlayer()}
+				},
+				{
 					name: '配置解码器',
 					src: '../../static/rattle/mine/download.png',
 					operate:()=>{this.configureCoder()}
@@ -239,7 +244,14 @@ export default {
 			
 			
 		},
-		
+		/*
+		*选择播放机
+		*/
+		choosePlayer(){
+			uni.navigateTo({
+				url: '../../pages/side/choosePlayer/choosePlayer',
+			});
+		},
 		/*
 		*配置解码器
 		*/

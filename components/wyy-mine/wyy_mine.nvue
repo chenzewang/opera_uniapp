@@ -108,6 +108,9 @@
 					// {name: '我的收藏', icon: '&#xe68a;', number: subcount.artistCount + subcount.mvCount, src: '../../static/rattle/mine/collect.png'},//同上
 				]
 			},
+			to_playlist(playlist) {
+				$repeater.helper.to('/pages/playlist/playlist?playlist_id=' + playlist.id + '&cover_image=' + playlist.picUrl + '&name=' + playlist.name);
+			},
 			subcount: function() {
 				return this.$store.state.subcount;
 			},

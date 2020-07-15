@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-16 21:45:16
- * @LastEditTime: 2020-07-02 18:03:59
+ * @LastEditTime: 2020-07-14 14:02:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\model\player.js
@@ -19,7 +19,8 @@ import config from '../config/config.js';
  * 
  */
 export function connectPlayer(params) {
-  let url = `http://${params.hostname}:9090/player/connect`
+  let url = `http://${params.hostname}:8888/player/connect`
+  params.port=9090//固定9090端口的，不要改
   return new Promise((resolve, reject) => {
     uni.request({
       url: url,

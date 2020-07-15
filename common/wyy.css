@@ -1,5 +1,5 @@
 .wyy-main-color {
-	background-color: rgba(218, 45, 30, 1);
+	background-color: rgba(0, 120, 120, 1);
 }
 
 .wyy-bg-color {
@@ -22,7 +22,7 @@
 	border-radius: 50%;
 	height: 60rpx;
 	width: 60rpx;
-	color: #FF0000;
+	color: #007878;
 }
 
 .wyy-loading {

@@ -57,7 +57,7 @@
 
 <script>
 	import {
-		getSqueezeliteList,
+		getWifiList,
 		configureDecoder,
 		checkNowWifi,
 		connectWifi
@@ -89,7 +89,7 @@
 		},
 		methods: {
 			getDecoderList() {
-				getSqueezeliteList()
+				getWifiList()
 					.then((res) => {
 						this.decoder_list = res;
 					})

@@ -66,9 +66,9 @@
 				uni.showLoading({
 					title:"配置中"
 				})
-				var ouuput = String(e.target.dataset.val).split("-")[0].trim()
+				var output = String(e.target.dataset.val).split("-")[0].trim()
 				configureDecoder({
-					ouuput: ouuput,
+					output: output,
 					dsd: this.dsd 
 				}).then(res => {
 					uni.hideLoading()

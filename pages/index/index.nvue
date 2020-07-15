@@ -1,6 +1,6 @@
 <template>
 	<view class="tabs wyy-bg-color" style="">
-		<view :style="{ height: statusbar_height + 'px'}" style="background-color: rgba(218, 45, 30, 1);;"></view>
+		<view :style="{ height: statusbar_height + 'px'}" style="background-color: rgba(0, 120, 120, 1);;"></view>
 		
 
 		<!-- 顶部栏 -->
@@ -107,7 +107,7 @@
 		},
 		
 		created() {
-			this.init_user();
+			// this.init_user();
 		},
 		onShow() {
 			
@@ -167,12 +167,12 @@
 	.sub_page {
 		flex-direction: row;
 		justify-content: space-between;
-		background-color: rgba(218, 45, 30, 1);
+		background-color: rgba(0, 120, 120, 1);
 	}
 
 
 	.scroll-h {
-		background-color: rgba(218, 45, 30, 1);
+		background-color: rgba(0, 120, 120, 1);
 		width: 550rpx;
 		height: 80rpx;
 		flex-direction: row;

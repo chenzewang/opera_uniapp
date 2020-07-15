@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-17 14:19:27
- * @LastEditTime: 2020-06-01 00:37:50
+ * @LastEditTime: 2020-07-15 14:30:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\pages\welcome\welcome.nvue
@@ -39,7 +39,6 @@
 		methods: {
 			check_login() {
 				$repeater.user.check_login((user_status)=> {
-					console.log(user_status);
 					if (user_status && $repeater.storage.is_login()) { // 已登录
 						let uid = user_status.profile.userId;
 						this.$store.commit('set_uid', uid);

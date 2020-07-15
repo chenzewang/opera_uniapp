@@ -218,6 +218,10 @@
 			open_playlist() {
 				this.$refs.playlist_drawer.open_playlist();
 			},
+
+			/**
+			 * 选择播放模式 （单曲、列表、随机）
+			 */
 			change_play_mode() {
 				let mode_list = ['single', 'sequence', 'random'];
 				let current_mode = this.play_mode;
@@ -226,6 +230,8 @@
 				let next_mode = mode_list[next_index];
 				this.$store.commit('set_play_mode', next_mode);
 			},
+
+
 			like(event) {
 				event.stopPropagation();
 				console.log(this.played.id);
@@ -245,6 +251,8 @@
 				})
 				
 			},
+
+			// 歌词滚动
 			set_active_lyric_row_index() {
 				if (this.nolyric) {
 					return;

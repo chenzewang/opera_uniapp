@@ -1,7 +1,12 @@
 <template>
 	<view class="box">
 		<!-- 连接设备页面 -->
-		<div style="display:flex;flex-direction: column;height: 100%;align-content: flex-end;">
+		<div style="
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-content: flex-end;
+      ">
 			<div>
 				<web-view src="/hybrid/html/getlocalip.html" @message="handleMessage" :webview-styles="webviewStyles"></web-view>
 			</div>
@@ -22,8 +27,10 @@
 						<h3 class="fav_list_title_h3">可连接的ip</h3>
 					</div>
 					<div class="my_fav_list">
-						<button class="iplist " plain @tap="connectPlayer" data-ip="192.168.1.103">192.168.1.103(测试)</button>
-						<button class="iplist " plain v-for="(item, index) in ipList" :key="index" :data-ip="item" @tap="connectPlayer">
+						<button class="iplist" plain @tap="connectPlayer" data-ip="192.168.0.100">
+							192.168.0.100(测试)
+						</button>
+						<button class="iplist" plain v-for="(item, index) in ipList" :key="index" :data-ip="item" @tap="connectPlayer">
 							<span>{{ item }}</span>
 						</button>
 					</div>
@@ -33,10 +40,15 @@
 			<!-- <div class="bottom" style="display:flex;flex-direction:column;align-content:flex-end;"> -->
 			<!-- <div></div> -->
 			<view>
-			<button class="btn" :style="isSacning?'background-color: #e2e2e2;' : 'background-color: #fcfcfc;'" type="primary" :disabled="isSacning" @tap="scanIps">
-				<span class="iconleft">&#xe75e;</span>
-				<span class="iconbot" style="color: #000000;">扫描</span>
-			</button>
+				<button class="btn" :style="
+            isSacning
+              ? 'background-color: #e2e2e2;'
+              : 'background-color: #fcfcfc;'
+          "
+				 type="primary" :disabled="isSacning" @tap="scanIps">
+					<span class="iconleft">&#xe75e;</span>
+					<span class="iconbot" style="color: #000000;">扫描</span>
+				</button>
 			</view>
 			<!-- <div></div> -->
 			<!-- </div> -->
@@ -45,34 +57,34 @@
 </template>
 
 <script>
-	import loadLine from '@/components/load-line/load-line.vue';
+	import loadLine from "@/components/load-line/load-line.vue";
 	import {
 		connectPlayer
-	} from '@/model/player.js';
+	} from "@/model/player.js";
 	var wv; //计划创建的webview
 
 	export default {
 		components: {
-			loadLine
+			loadLine,
 		},
 		data() {
 			return {
 				webviewStyles: {
-					height: 0
+					height: 0,
 				},
 				loadPercent: 0,
-				localip: '0.0.0.0',
+				localip: "0.0.0.0",
 				loading: true,
 				ipList: [],
 				isSacning: false,
 				interval: null,
-				hasLocalip: false
+				hasLocalip: false,
 			};
 		},
 		computed: {
 			connectionIp() {
-				return uni.getStorageSync('connectionIp');
-			}
+				return uni.getStorageSync("connectionIp");
+			},
 		},
 		methods: {
 			handleMessage(evt) {
@@ -88,22 +100,22 @@
 				// let count_scaned=0//已经扫描的个数
 				for (let i = 0; i < 256; i++) {
 					requestArr.push(function() {
-						let arr = _this.localip.split('.');
+						let arr = _this.localip.split(".");
 						arr[3] = i;
 						// arr=[192,168,1,104]
-						let url = 'http://' + arr.join('.') + ':8888/api/og/detail';
+						let url = "http://" + arr.join(".") + ":8888/api/og/detail";
 						uni.request({
 							timeout: 200,
 							url: url,
-							success: res => {
-								console.log('扫描到：', res);
-								_this.ipList.push(arr.join('.'));
+							success: (res) => {
+								console.log("扫描到：", res);
+								_this.ipList.push(arr.join("."));
 							},
-							fail: err => {},
+							fail: (err) => {},
 							complete: () => {
 								clock--;
 								_this.loadPercent = parseInt((i / 255) * 100);
-							}
+							},
 						});
 					});
 				} //end for
@@ -124,33 +136,37 @@
 			//链接ip
 			connectPlayer(e) {
 				uni.showLoading({
-					title: '连接中'
+					title: "连接中",
 				});
 				// console.log(e.target.dataset.ip);
 				connectPlayer({
 						hostname: e.target.dataset.ip,
-						port: 9090
 					})
-					.then(res => {
-						
+					.then((res) => {
+						console.log(res);
 						if (res.data.status == 200) {
 							uni.hideLoading();
-							uni.setStorageSync('connectionIp', e.target.dataset.ip);
-							this.connectionIp=e.target.dataset.ip
+							uni.setStorageSync("connectionIp", e.target.dataset.ip);
 							uni.showToast({
-								title: '连接成功'
+								title: "连接成功",
+							});
+						}else{
+							uni.hideLoading();
+							uni.showToast({
+								title: "连接失败",
 							});
 						}
 					})
-					.catch(err => {
+					.catch((err) => {
 						uni.hideLoading();
 						uni.showToast({
-							title: '连接失败'
+							title: "连接失败",
 						});
 					});
-			}
+			},
 		},
 		onReady() {
+			//用webview来跑webrtc，搜索ip
 			// #ifdef APP-PLUS
 			var currentWebview = this.$scope.$getAppWebview();
 			setTimeout(function() {
@@ -158,9 +174,9 @@
 				// console.log(currentWebview.children().length);
 				wv.setStyle({
 					top: 0,
-					bottom: 'auto',
+					bottom: "auto",
 					height: 0,
-					width: 0
+					width: 0,
 				});
 				// console.log(wv.getStyle());
 			}, 1000); //如果是页面初始化调用时，需要延时一下
@@ -177,7 +193,7 @@
 				this.interval = null;
 			}
 		},
-		watch: {}
+		watch: {},
 	};
 </script>
 
@@ -187,12 +203,14 @@
 	}
 
 	@font-face {
-		font-family: 'iconfont';
+		font-family: "iconfont";
 		/* project id 1760556 */
-		src: url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.eot');
-		src: url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.eot?#iefix') format('embedded-opentype'), url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.woff2') format('woff2'),
-			url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.woff') format('woff'), url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.ttf') format('truetype'),
-			url('http://at.alicdn.com/t/font_1760556_crzxd3efh4p.svg#iconfont') format('svg');
+		src: url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.eot");
+		src: url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.eot?#iefix") format("embedded-opentype"),
+			url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.woff2") format("woff2"),
+			url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.woff") format("woff"),
+			url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.ttf") format("truetype"),
+			url("http://at.alicdn.com/t/font_1760556_crzxd3efh4p.svg#iconfont") format("svg");
 	}
 
 	.ip_webview {
@@ -237,49 +255,53 @@
 		display: block;
 	}
 
-.my_fav_list {
-	margin: 0;
-	padding: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	border: 0;
-	display: block;
-	overflow: hidden;
-	zoom: 1;
-}
-.iplist {
-	font-size: 15px;
-	color: #4d4d4d;
-	margin-left: 5%;
-	padding: 16px 0;
-	border: 0 !important;
-	border-top: 1px solid #e0e0e0 !important;
-	text-align: left;
-	list-style: none;
-	/* background-color: rgba(0,0,0,0.1); */
-	border-radius: 0;
-}
-/* .bottom {
+	.my_fav_list {
+		margin: 0;
+		padding: 0;
+		font-size: 100%;
+		vertical-align: baseline;
+		border: 0;
+		display: block;
+		overflow: hidden;
+		zoom: 1;
+	}
+
+	.iplist {
+		font-size: 15px;
+		color: #4d4d4d;
+		margin-left: 5%;
+		padding: 16px 0;
+		border: 0 !important;
+		border-top: 1px solid #e0e0e0 !important;
+		text-align: left;
+		list-style: none;
+		/* background-color: rgba(0,0,0,0.1); */
+		border-radius: 0;
+	}
+
+	/* .bottom {
 	display: flex;
 	flex-direction:cloumn;
 	align-content: flex-end;
 } */
-.btn{
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-}
-.iconleft {
-	display: inline-block;
-	font-family: iconfont;
-	text-align: center;
-	margin-top: 5rpx;
-	margin-right: 20rpx;
-	color: black;
-	font-size: 35rpx;
-}
-.iconbot {
-	font-size: 35rpx;
-	color: #000000;
-}
+	.btn {
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+	}
+
+	.iconleft {
+		display: inline-block;
+		font-family: iconfont;
+		text-align: center;
+		margin-top: 5rpx;
+		margin-right: 20rpx;
+		color: black;
+		font-size: 35rpx;
+	}
+
+	.iconbot {
+		font-size: 35rpx;
+		color: #000000;
+	}
 </style>

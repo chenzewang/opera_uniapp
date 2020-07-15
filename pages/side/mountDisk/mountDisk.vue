@@ -101,6 +101,9 @@
 							mountMobileDisk().then(res=>{
 								console.log(res);
 								uni.hideLoading()
+							}).catch(err=>{
+								console.log(res);
+								uni.hideLoading()
 							})
 							// if (res.confirm) {
 							// 	uni.navigateTo({
