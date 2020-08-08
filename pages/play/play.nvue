@@ -1,7 +1,7 @@
 <template>
 	<view class="page">
 
-		<!-- 歌曲图片 -->
+		<!-- 歌词 (我们的版本不需要歌词，用歌曲信息代替)-->
 		<uni-transition :duration="300" :mode-class="mode_class" :styles="transfrom_class" :show="show_lyric">
 			
 			<list v-if="!nolyric" class="lyric-list" show-scrollbar="false" >
@@ -16,9 +16,9 @@
 				<text class="lyric-row-text">纯音乐, 请欣赏</text>
 			</view>
 		</uni-transition>
-		<!-- end 歌曲图片 -->
+		<!-- end 歌词 -->
 
-		<!-- 歌词以及收藏、下载、评论、更多 四个按钮 -->
+		<!-- 歌曲图片以及收藏、下载、评论、更多 四个按钮 -->
 		<uni-transition :duration="300" :mode-class="mode_class" :styles="transfrom_class" :show="!show_lyric">
 			<view class="container" @tap="change_container()">
 				<view class="cover">
@@ -44,7 +44,7 @@
 				</view>
 			</view>
 		</uni-transition>
-		<!-- end 歌词以及四个按钮 -->
+		<!-- end 歌曲图片以及四个按钮 -->
 		
 		<!-- 播放进度条以及几个播放操作按钮 -->
 		<view class="footer">
@@ -103,6 +103,8 @@
 	
 	import $repeater from '@/utils/repeater.js';
 	
+	import { getCurrentSong,playerSeeked,playerTurn } from "@/model/api/playerApi.js";
+	
 	const animation = weex.requireModule('animation');
 	const dom = weex.requireModule('dom')
 	
@@ -121,7 +123,7 @@
 				timer: '', //计时器
 				animation_timer: '',
 				deg: 0,
-				dragging: false, //
+				dragging: false, //进度条是否正在滑动（手指拖动）中
 				show_lyric: false, //是否显示歌词
 				nolyric: false,
 				lyric: [],
@@ -196,7 +198,9 @@
 			}
 		},
 		created() {
-			
+			setInterval(()=>{
+				this.getCurrentSong()
+			},1000)
 		},
 		onReady() {
 			this._init();
@@ -204,10 +208,10 @@
 		methods: {
 			_init() {
 				this.set_title(this.played.name);
-				this.get_lyric();
+				// this.get_lyric();
 				this.init_cover_rotate();
-				this.init_timer();
-				this.init_slider()
+				// this.init_timer();
+				// this.init_slider()
 			},
 			init_slider() {
 				setTimeout(()=> {
@@ -377,14 +381,31 @@
 			 * 完成一次拖动后触发的事件handle函数
 			 */
 			slider_change(e) {
-				// console.log(e);
 				let position = e.detail.value;
-				$repeater.player.seek_to(position);
+				playerSeeked({second:position}).then(res=>{
+					console.log(res);
+				}).catch(err=>{
+					console.log(err);
+				})
+				
+				//触发h5播放器，用不到了
+				// $repeater.player.seek_to(position);
+				
 				this.dragging = false;
 			},
 			turn() {
 				//切换播放暂停状态
-				$repeater.player.turn();
+				playerTurn(this.playing)
+				if(this.playing){
+					this.$store.commit('set_playing', false);
+				}else{
+					this.$store.commit('set_playing', true);
+				}
+				
+				
+				// h5播放器的，不用了
+				// $repeater.player.turn();
+				
 			},
 			stop_rotate() {
 				
@@ -413,7 +434,19 @@
 			prev() {
 				console.log('上一曲');
 				this.$refs.playlist_drawer.prev_song();
+			},
+			
+			//现在开始我们的部分
+			getCurrentSong(){
+				getCurrentSong().then(res=>{
+					this.current_position=String(res.total_time).split(".")[0]-String(res.current_time).split(".")[0]
+					this.duration=String(res.total_time).split(".")[0]
+					// console.log(res);
+				}).catch(err=>{
+					console.log(err);
+				})
 			}
+			
 		},
 	}
 </script>

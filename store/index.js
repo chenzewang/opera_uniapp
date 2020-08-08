@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-15 11:43:56
+ * @LastEditTime: 2020-07-18 13:16:33
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \opera_uniapp\store\index.js
+ */ 
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex)
@@ -14,6 +22,8 @@ const store = new Vuex.Store({
 		likelist: [], //喜欢的歌曲列表ids
 		
 		current_playlist: [], // 当前播放列表, 应该两种模式, 播放历史和歌曲所在清单
+
+		curent_song_info:{}
 	},
 	mutations: {
 		push_current_playlist(state, item) {

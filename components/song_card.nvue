@@ -1,14 +1,18 @@
 <template>
-	<view class="music" @tap="play">
+	
+	<!-- 歌单页面的歌曲item模块 -->
+	
+	<view class="music" @tap="OpearPlay">
 		
 		<view class="music-index" v-if="show_number">
 			<text class="index-text">{{number + 1}}</text>
 		</view>
 		<view class="music-info" :class="show_number ? '' : 'padding-left'">
-			<text class="music-name">{{song.name}}</text>
+			<text class="music-name">{{song.title}}</text>
 			<view class="music-creators">
-				<text class="music-creator" v-for="(creator, c_index) in song.artists" :key="c_index">{{creator.name + ' '}}</text>
-				<text class="music-al">- {{song.album_name}}</text>
+				<!-- <text class="music-creator" v-for="(creator, c_index) in song.artists" :key="c_index">{{creator.name + ' '}}</text> -->
+				<text class="music-creator">{{song.artist + ' '}}</text>
+				<text class="music-al">- {{song.album}}</text>
 			</view>
 		</view>
 		<view class="handle-area" v-if="false">
@@ -19,6 +23,8 @@
 
 <script>
 	import $repeater from '@/utils/repeater.js';
+	import { playById } from "@/model/api/playerApi.js";
+	
 	export default {
 		props: {
 			song: {
@@ -55,6 +61,7 @@
 			// 播放
 			// 如果选中歌曲和底部播放组件是同一首歌, 则跳转到播放页并开始播放
 			// 如果不同, 则开始播放新选中的歌曲, 更新播放组件信息, 不跳转
+			// 网易云版本的
 			play() {
 				let song_id = this.song.id;
 				$repeater.player.start(song_id, (played)=> {
@@ -92,6 +99,20 @@
 				}
 				
 			},
+			OpearPlay(){
+				playById({track_id:this.song.id}).then(res=>{
+					//todo:触发更新函数，获取正在播放的歌曲信息，更新播放条ui
+					this.$store.commit('set_playing', true);
+
+				}).catch(err=>{
+					console.log(err);
+					uni.showToast({
+					    title: '播放失败，请连接设备并选择播放机',
+					    duration: 2000,
+						icon:'none'
+					});
+				})
+			}
 		},
 	}
 </script>

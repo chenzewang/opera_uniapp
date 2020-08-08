@@ -9,8 +9,10 @@
 					<view class="intro-right">
 						<text class="name">{{tmp_name}}</text>
 						<view class="creator">
-							<image class="creator-headimg" :src="playlist.creator.avatarUrl"></image>
-							<text class="creator-nickname">{{playlist.creator.nickname}}</text>
+							<!-- <image class="creator-headimg" :src="playlist.creator.avatarUrl"></image> -->
+							<image class="creator-headimg" :src="tmp_image"></image>
+							<!-- <text class="creator-nickname">{{playlist.creator.nickname}}</text> -->
+							<text class="creator-nickname">{{tmp_name}}</text>
 							<wyy-icon type="&#xe79b;" size="20" color="rgba(255,255,255,.6)" ></wyy-icon>
 						</view>
 						<view class="intro-footer">
@@ -48,8 +50,12 @@
 				</view>
 			</header>
 			
+			<!-- 原来的网易云版本 -->
+			<!-- <cell v-for="(song, index) in format_songs" :key="index" >
+				<song-card :song="song" :number="index" :playlist_id="playlist_id"></song-card>
+			</cell> -->
 			
-			<cell v-for="(song, index) in format_songs" :key="index" >
+			<cell v-for="(song, index) in playlist" :key="index" >
 				<song-card :song="song" :number="index" :playlist_id="playlist_id"></song-card>
 			</cell>
 		</list>
@@ -115,8 +121,8 @@
 			    title: this.tmp_name
 			});
 			
-			this.get_playlist_detail();
-			
+			// this.get_playlist_detail();
+			this.getSongByalbum()
 		},
 		onReady() {
 			
@@ -128,12 +134,30 @@
 			
 		},
 		methods: {
-			get_playlist_detail() {
+			get_playlist_detail() {//原来调用网易云的接口，暂时不用了
 				let playlist_id = this.playlist_id;
 				$repeater.playlist.get_playlist_detail(playlist_id, (data)=> {
 					let playlist = data.playlist;
 					this.playlist = playlist;
 				});
+			},
+			
+			getSongByalbum(){
+				$repeater.playlist.getSongByalbum({
+					album:this.tmp_name,
+					page_size:100,
+					page:1
+				}).then(res=>{
+					this.playlist=res
+					// console.log(res);
+				}).catch(err=>{
+					console.log(err);
+				})
+			},
+			
+			//获取歌曲图片
+			getSongImg(id){
+				
 			}
 		}
 	}

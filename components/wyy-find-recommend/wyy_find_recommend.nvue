@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-15 11:43:56
- * @LastEditTime: 2020-07-15 13:54:33
+ * @LastEditTime: 2020-07-16 23:06:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \opera_uniapp\components\wyy-find-recommend\wyy_find_recommend.nvue
@@ -92,9 +92,10 @@
 			},
 			getAlbumsList(params){
 				getAlbumsList(params).then(res=>{
+					console.log(res);
 					this.albums=res
 				}).catch(err=>{
-					
+					console.log(err);
 				})
 			},
 			toMusicList() {

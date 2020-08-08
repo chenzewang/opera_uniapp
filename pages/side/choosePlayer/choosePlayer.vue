@@ -13,7 +13,7 @@
 						<h3 class="fav_list_title_h3">目前选定的的播放机</h3>
 					</div>
 					<div class="my_fav_list">
-						<view class="iplist">{{  }}</view>
+						<view class="iplist">{{ "还没写这块代码" }}</view>
 					</div>
 				</div>
 			</div>
@@ -27,13 +27,13 @@
 						<button class="iplist" plain @tap="setPlayer" data-ip="192.168.0.100">
 							192.168.0.100(测试)
 						</button>
-						<button class="iplist" plain v-for="(item, index) in list" :key="index" :data-name="item" @tap="setPlayer">
-							<span>{{ item }}</span>
+						<button class="iplist" plain v-for="(item, index) in list" :key="index" :data-val="item.name" @tap="setPlayer">
+							<span>{{ item.name + "(" + item.mac +")"}}</span>
 						</button>
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- <view>
 				<button class="btn" :style="
             isSacning
@@ -45,7 +45,7 @@
 					<span class="iconbot" style="color: #000000;">扫描</span>
 				</button>
 			</view> -->
-		
+
 		</div>
 	</view>
 </template>
@@ -53,7 +53,8 @@
 <script>
 	import loadLine from "@/components/load-line/load-line.vue";
 	import {
-		getPlayerList,setPlayer
+		getPlayerList,
+		setPlayer
 	} from "@/model/api/playerApi.js";
 
 	export default {
@@ -62,7 +63,7 @@
 		},
 		data() {
 			return {
-			
+
 				loadPercent: 0,
 				localip: "0.0.0.0",
 				loading: true,
@@ -70,32 +71,44 @@
 				isSacning: false,
 				interval: null,
 				hasLocalip: false,
-				list:[]
+				list: []
 			};
 		},
 		computed: {
-			
+
 		},
 		methods: {
-			getPlayerList(){
-				getPlayerList().then(res=>{
-					this.list=res
+			getPlayerList() {
+				getPlayerList().then(res => {
+					this.list = res
 					console.log(res);
-				}).catch(err=>{
+				}).catch(err => {
 					console.log(err);
 				})
 			},
-			setPlayer(){
-				// setPlayer({}).then()
+			setPlayer(e) {
+				let player_name = e.target.dataset.val
+				setPlayer({
+					player: player_name
+				}).then(res => {
+					uni.showToast({
+						title: "设定成功"
+					})
+				}).catch(err => {
+					console.log(err);
+					uni.showToast({
+						title: "设定失败",
+						icon: "none"
+					})
+				})
 			}
-			
 		},
 		onReady() {
 			this.getPlayerList()
 		},
 
 		onUnload() {
-			
+
 		},
 		watch: {},
 	};

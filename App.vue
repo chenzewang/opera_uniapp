@@ -66,7 +66,8 @@
 			/**
 			 * 初始化播放器（单例）
 			 * 这个是调用h5 plus的SDK，使用手机播放。
-			 * 需要重写一个播放器
+			 * 
+			 * 这个用不到了
 			 */
 			init_player() {
 				//初始化的时候, 如果played存在, 则需要将played.src填入, 然后不要播放, 这样play页面就可以获取到歌曲音频长度
@@ -109,10 +110,10 @@
 				player.addEventListener('waiting', () => {
 					console.log('on waiting');
 				});
-				player.addEventListener('seeking', () => {
+				player.addEventListener('seeking', (e) => {
 					console.log('on seeking');
 				});
-				player.addEventListener('seeked', () => {
+				player.addEventListener('seeked', (e) => {
 					console.log('on seeked');
 				});
 				player.addEventListener('prev', () => {
